@@ -7,15 +7,14 @@ import { Outlet } from "react-router-dom";
 class App extends Component {
   render() {
     return (
-      <div>
-        <header>
-          <Header />
-        </header>
+      <div className="py-0">
+        <Header/>
 
-        <body className="py-40">
+        <body className="w-full h-auto flex justify-center items-center relative z-5">
           <Background />
-          <Outlet className="z-30"/>
-
+          <div className="absolute flex justify-center items-center z-10">
+            <Outlet className="z-10"/>
+          </div>
         {/* Background Image Here*/}
 
         </body>

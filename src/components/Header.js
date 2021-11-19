@@ -9,7 +9,7 @@ class Header extends Component {
 
             {/* Header nav */},
 
-            <nav className="bg-gradient-to-r from-red-dark to-red fixed left-0 right-0">
+            <nav className="bg-gradient-to-r from-red-dark to-red fixed left-0 right-0 top-0 z-10">
                 <div className="flex justify-between px-5 font-sans font-light text-sm">
 
                     {/* Logo */}
