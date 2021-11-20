@@ -5,7 +5,7 @@ class Background extends Component{
     render() {
         return(
             <div>
-                <Particles
+                <Particles className="bg-black"
                 params={{
                     particles: {
                       number: {
@@ -16,7 +16,7 @@ class Background extends Component{
                         }
                       },
                       color: {
-                        value: "#000000"
+                        value: "#4E4E50"
                       },
                       shape: {
                         type: "circle",
