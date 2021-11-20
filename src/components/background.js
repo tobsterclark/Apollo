@@ -8,7 +8,7 @@ class Background extends Component{
                 <Particles
                 params={{
                   "fullScreen": {
-                    "enable": false,
+                    "enable": true,
                     "zIndex": 0
                   },
                   "particles": {
@@ -66,7 +66,7 @@ class Background extends Component{
                       }
                     }
                   },
-                  "retina_detect": true,
+                  "retina_detect": false,
                   "background": {
                     "color": "#1A1A1D",
                     "position": "50% 50%",

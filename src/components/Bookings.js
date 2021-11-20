@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import logo from './Images/logo.svg'
 import { Link } from 'react-router-dom'
 
 class Bookings extends Component {
 
     render() {
+        console.log("Test");
         return (
             <div>
                 <span>test page</span>
