@@ -3,14 +3,24 @@ import Particles from 'react-tsparticles'
 
 class Background extends Component{
     render() {
+      const particlesInit = (main) => {
+        console.log(main);
+      };
+    
+      const particlesLoaded = (container) => {
+        console.log(container);
+      };
         return(
             <div>
                 <Particles
+                init={particlesInit}
+                loaded={particlesLoaded}
                 params={{
                   "fullScreen": {
                     "enable": true,
                     "zIndex": 0
                   },
+                  "fpsLimit": 60,
                   "particles": {
                     "number": {
                       "value": 80,

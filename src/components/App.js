@@ -10,7 +10,7 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div className="pt-10">
         <div className="fixed left-0 right-0 top-0 z-50">
           <Header/>
         </div>
