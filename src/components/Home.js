@@ -4,10 +4,44 @@ import exampleMovie from './Images/exampleMovie.png'
 import exampleMovie2 from './Images/exampleMovie2.png'
 import exampleMovie3 from './Images/exampleMovie3.png'
 
+
+
+
 class Home extends Component {
     state = {
+        intervalID:0,
         index:1,
+        prevIndex:0,
+        nextIndex:2,
         picList:[exampleMovie, exampleMovie2, exampleMovie3]
+    }
+    componentDidMount() {
+        const newIntervalId = setInterval(() => {
+            if (this.state.nextIndex + 1 === this.state.picList.length ){
+                this.setState({ 
+                    prevIndex: this.state.index,
+                    index: this.state.nextIndex,
+                    nextIndex: 0
+                })
+            } else {
+                this.setState({
+                    prevIndex: this.state.index,
+                    index: this.state.nextIndex,
+                    nextIndex: this.state.nextIndex + 1
+                })
+            }
+        }, 5000);
+        
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                intervalId: newIntervalId,
+            };
+        });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalID);
     }
     render() {
         return (
@@ -15,8 +49,8 @@ class Home extends Component {
                 <div className="h-3/4">
                     <div className="h-full justify-center items-center">
                         <div className="h-full flex">
-                            <img src={this.state.picList[this.state.index - 1]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
-                            <img src={this.state.picList[this.state.index + 1]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
+                            <img src={this.state.picList[this.state.prevIndex]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
+                            <img src={this.state.picList[this.state.nextIndex]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
                         </div>
                         <div className="absolute inset-10 flex justify-center items-center h-screen">
                             <img src={this.state.picList[this.state.index]} alt="this is a movie" className="h-3/4 rounded-2xl"/>

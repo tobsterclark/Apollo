@@ -15,16 +15,16 @@ class Showing extends Component {
                     <span className="text-4xl">Now Showing</span>
                     <div className="flex gap-x-20">
                         <div className="flex flex-col items-center">
-                            <span>Movie 1</span>
                             <img src={this.state.picList[this.state.index]} alt="this is a movie" className="h-56"/>
+                            <span>Movie 1</span>
                         </div>
                         <div className="flex flex-col items-center">
-                            <span>Movie 2</span>
                             <img src={this.state.picList[this.state.index + 1]} alt="this is a movie"  className="h-56"/>
+                            <span>Movie 2</span>
                         </div>
                         <div className="flex flex-col items-center">
-                            <span>Movie 3</span>
                             <img src={this.state.picList[this.state.index - 1]} alt="this is a movie"  className="h-56"/>
+                            <span>Movie 3</span>
                         </div>
                     </div>
                 </div>
