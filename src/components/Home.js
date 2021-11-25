@@ -8,6 +8,7 @@ import MoviesContext from '../contexts/Movies'
  - grab the movies from firebase
  - Work on the transition between movies
  - Work on sending the user to the right place on book now button press
+
 */
 
 class Home extends Component {
@@ -20,38 +21,40 @@ class Home extends Component {
         picList:[]
     }
     componentDidMount() {
+        let mounted = true
         const posterURLS = [] // eslint-disable-next-line
         this.context.map((movies) => {
             posterURLS.push(movies.posterURL)
         })
         this.setState({picList: posterURLS})
-        
-        const newIntervalId = setInterval(() => {
-            if (this.state.nextIndex + 1 === this.state.picList.length ){
-                this.setState({ 
-                    prevIndex: this.state.index,
-                    index: this.state.nextIndex,
-                    nextIndex: 0
-                })
-            } else {
-                this.setState({
-                    prevIndex: this.state.index,
-                    index: this.state.nextIndex,
-                    nextIndex: this.state.nextIndex + 1
-                })
-            }
-        }, 5000);
-        
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                intervalId: newIntervalId,
-            };
-        });
-    }
 
-    componentWillUnmount() {
-        clearInterval(this.state.intervalID);
+        if(mounted) {
+            const newIntervalId = setInterval(() => {
+                if (this.state.nextIndex + 1 === this.state.picList.length ){
+                    this.setState({ 
+                        prevIndex: this.state.index,
+                        index: this.state.nextIndex,
+                        nextIndex: 0
+                    })
+                } else {
+                    this.setState({
+                        prevIndex: this.state.index,
+                        index: this.state.nextIndex,
+                        nextIndex: this.state.nextIndex + 1
+                    })
+                }
+            }, 5000);
+        
+        
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    intervalId: newIntervalId,
+                };
+            });
+
+        }
+        return () => mounted = false
     }
     render() {
         return (

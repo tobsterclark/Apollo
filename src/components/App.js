@@ -17,7 +17,6 @@ class App extends Component {
     database.ref('movies').on("value", (snapshot) => {
       snapshot.forEach(snap => {
         this.movies.push(snap.val());
-        console.log(snap.val())
       })
       this.setState({
         Status:"resolved"
