@@ -11,7 +11,7 @@ class Background extends Component{
         console.log(container);
       };
         return(
-            <div className="yr">
+            <div>
                 <Particles
                 init={particlesInit}
                 loaded={particlesLoaded}
