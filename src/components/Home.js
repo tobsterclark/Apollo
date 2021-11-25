@@ -1,21 +1,31 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import exampleMovie from './Images/exampleMovie.png'
-import exampleMovie2 from './Images/exampleMovie2.png'
-import exampleMovie3 from './Images/exampleMovie3.png'
+import MoviesContext from '../contexts/Movies'
 
 
+/* Todo: 
 
+ - grab the movies from firebase
+ - Work on the transition between movies
+ - Work on sending the user to the right place on book now button press
+*/
 
 class Home extends Component {
+    static contextType = MoviesContext
     state = {
         intervalID:0,
         index:1,
         prevIndex:0,
         nextIndex:2,
-        picList:[exampleMovie, exampleMovie2, exampleMovie3]
+        picList:[]
     }
     componentDidMount() {
+        const posterURLS = [] // eslint-disable-next-line
+        this.context.map((movies) => {
+            posterURLS.push(movies.posterURL)
+        })
+        this.setState({picList: posterURLS})
+        
         const newIntervalId = setInterval(() => {
             if (this.state.nextIndex + 1 === this.state.picList.length ){
                 this.setState({ 

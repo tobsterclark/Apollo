@@ -11,7 +11,7 @@ class Background extends Component{
         console.log(container);
       };
         return(
-            <div>
+            <div className="yr">
                 <Particles
                 init={particlesInit}
                 loaded={particlesLoaded}
@@ -23,7 +23,7 @@ class Background extends Component{
                   "fpsLimit": 60,
                   "particles": {
                     "number": {
-                      "value": 80,
+                      "value": 60,
                       "density": {
                         "enable": true,
                         "value_area": 800
