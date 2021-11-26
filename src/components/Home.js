@@ -58,7 +58,7 @@ class Home extends Component {
     }
     render() {
         return (
-            <div className="font-sans font-light text-white text-4xl z-10 flex justify-center items-center h-screen">
+            <div className="font-sans font-light text-theme-white text-4xl z-10 flex justify-center items-center h-screen">
                 <div className="h-3/4">
                     <div className="h-full justify-center items-center">
                         <div className="h-full flex">
@@ -70,7 +70,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className="absolute inset-0 top-10 flex justify-center items-center">
-                        <Link to="/book" className="bg-red-vibrant rounded-2xl py-3 px-5 hover:bg-white hover:text-red-vibrant">Book Now</Link>
+                        <Link to="/book" className="bg-theme-light text-theme-black rounded-2xl py-3 px-5 hover:bg-theme-black hover:text-theme-light">Book Now</Link>
                     </div>
                 </div>
                 

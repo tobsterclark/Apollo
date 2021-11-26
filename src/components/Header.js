@@ -9,12 +9,12 @@ class Header extends Component {
 
             {/* Header nav */},
 
-            <nav className="bg-gradient-to-r from-red-dark to-red">
+            <nav className="bg-gradient-to-r from-theme-dark to-theme">
                 <div className="flex justify-between px-5 font-sans font-light text-sm">
 
                     {/* Logo */}
 
-                    <div className="text-white font-bold py-3">
+                    <div className="text-theme-white font-bold py-3">
                         <Link to="/" className="flex gap-x-5 items-center">
                             <img src={logo} alt="Logo" className=""/>
                             <span>Apollo</span>
@@ -23,10 +23,10 @@ class Header extends Component {
 
                     {/* Navigation */}
 
-                    <div className="flex gap-x-7 text-white items-center">
-                        <Link to="/Bookings" className="py-3 hover:text-gray-300">My Bookings</Link>
-                        <Link to="/Login" className="py-3 hover:text-gray-300">Log In</Link>
-                        <Link to="/Bookings" className="bg-red-vibrant rounded-2xl py-3 px-3 hover:bg-white hover:text-red-vibrant">Make Booking</Link>
+                    <div className="flex gap-x-7 text-theme-white items-center">
+                        <Link to="/Bookings" className="py-3 hover:text-theme-light">My Bookings</Link>
+                        <Link to="/Login" className="py-3 hover:text-theme-light">Log In</Link>
+                        <Link to="/Bookings" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white">Make Booking</Link>
                     </div>
                 </div>
             </nav>

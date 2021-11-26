@@ -6,16 +6,12 @@ module.exports = {
         colors: {
           transparent: 'transparent',
           current: 'currentColor',
-          black: {
-            DEFAULT: '#1A1A1D',
-          },
-          gray: {
-            DEFAULT: '#4E4E50',
-          },
-          red: {
-            dark: '#6F2232',
-            DEFAULT: '#950740',
-            vibrant: '#C3073F'
+          theme: {
+            black: '#17252A',
+            dark: '#2B7A78',
+            DEFAULT: '#3AAFA9',
+            light: '#DEF2F1',
+            white: '#FEFFFF'
           }
         }
     }

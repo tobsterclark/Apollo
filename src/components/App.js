@@ -9,9 +9,9 @@ import SyncLoader from 'react-spinners/SyncLoader'
 
 class App extends Component {
   state= {
-    Status:"idle"
+    Status:"resolved"
   }
-  movies = []
+  movies = [] 
 
   componentDidMount() {
     database.ref('movies').on("value", (snapshot) => {

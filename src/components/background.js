@@ -79,7 +79,7 @@ class Background extends Component{
                 },
                 "retina_detect": false,
                 "background": {
-                  "color": "#1A1A1D",
+                  "color": "#17252A",
                   "position": "50% 50%",
                   "repeat": "no-repeat",
                   "size": "cover"
