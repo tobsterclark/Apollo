@@ -61,7 +61,7 @@ class Home extends Component {
             <div className="font-sans font-light text-theme-white text-4xl z-10 flex justify-center items-center h-screen">
                 <div className="h-3/4">
                     <div className="h-full justify-center items-center">
-                        <div className="h-full flex">
+                        <div className="h-full hidden md:flex">
                             <img src={this.state.picList[this.state.prevIndex]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
                             <img src={this.state.picList[this.state.nextIndex]} alt="this is a movie" className="h-full rounded-2xl -mx-20"/>
                         </div>
