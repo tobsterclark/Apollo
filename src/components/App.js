@@ -9,7 +9,7 @@ import SyncLoader from 'react-spinners/SyncLoader'
 
 class App extends Component {
   state= {
-    Status:"resolved"
+    Status:"idle"
   }
   movies = [] 
 
@@ -29,19 +29,19 @@ class App extends Component {
       return(
         <div className="flex h-screen w-full items-center justify-center">
           <Background/>
-          <SyncLoader color="#950740"/>
+          <SyncLoader color="#2B7A78"/>
         </div>
         )
     }
     else if (this.state.Status === 'resolved') {
       return (
         <MovieContext.Provider value={this.movies}>
-          <div className="pt-10">
+          <div className="">
             <div className="fixed left-0 right-0 top-0 z-50">
               <Header/>
             </div>
 
-            <div className="h-screen w-full justify-center items-center p-20 flex">
+            <div className="h-screen w-full justify-center pt-40 p-20 flex">
               <Outlet/>
             </div>
 

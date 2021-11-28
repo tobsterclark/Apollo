@@ -21,11 +21,12 @@ ReactDOM.render(
         <Routes>
             <Route path="/" element={<App />}>
                 <Route index element={<Home />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Book" element={<Book />} />
-                <Route path="/Bookings" element={<Bookings />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Login/>} />
+                <Route path="/book" element={<Book />} />
+                <Route path="/bookings" element={<Bookings />} />
             </Route>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>,
     rootElement

@@ -6,7 +6,7 @@ class Header extends Component {
     hidden = "hidden"
     shown = "text-sm text-center text-theme-white font-light font-sans py-2"
     state = {
-        showMenu:"text-sm text-theme-white font-light font-sans py-2 hidden"
+        showMenu:this.hidden
     }
     handleClick = () => {
         if (this.state.showMenu === this.hidden) {
@@ -35,12 +35,14 @@ class Header extends Component {
                     {/* Navigation */}
 
                     <div className="hidden sm:flex gap-x-7 text-theme-white items-center">
-                        <Link to="/bookings" className="py-3 hover:text-theme-light">My Bookings</Link>
-                        <Link to="/login" className="py-3 hover:text-theme-light">Log In</Link>
-                        <Link to="/book" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white">Make Booking</Link>
+                        <Link to="/" className="py-3 hover:text-theme-black">Home</Link>
+                        <Link to="/bookings" className="py-3 hover:text-theme-black">My Bookings</Link>
+                        <Link to="/login" className="py-3 hover:text-theme-black">Log In</Link>
+                        <Link to="/book" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
                     </div>
 
-                    <div className="sm:hidden flex items-center">
+                    <div className="sm:hidden flex items-center gap-x-7">
+                    <Link to="/book" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
                         <button onClick={this.handleClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#FEFFFF">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -50,9 +52,10 @@ class Header extends Component {
                 </div>
 
                 <div className={this.state.showMenu}>
-                    <Link to="/bookings" onClick={this.handleClick} className="block py-2 px-2">My Bookings</Link>
+                    <Link to="/" onClick={this.handleClick} className="block hover:bg-theme-light hover:text-theme-black py-2 px-2">Home</Link>
+                    <Link to="/bookings" onClick={this.handleClick} className="block hover:bg-theme-light hover:text-theme-black py-2 px-2">My Bookings</Link>
                     <Link to="/login" onClick={this.handleClick} className="block hover:bg-theme-light hover:text-theme-black py-2 px-2">Log In</Link>
-                    <Link to="/book" onClick={this.handleClick} className="block py-2 px-2">Make Booking</Link>
+                    {/* <Link to="/book" onClick={this.handleClick} className="block hover:bg-theme-light hover:text-theme-black py-2 px-2 ">Make Booking</Link> */}
                 </div>
             </nav>
 
