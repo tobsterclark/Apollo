@@ -11,6 +11,8 @@ import Bookings from './components/Bookings'
 import Book from './components/Book'
 import NotFound from './components/404'
 import Home from './components/Home'
+import LoginInput from './components/LoginInput'
+import SignupInput from './components/SignupInput'
 import './index.css'
 
 
@@ -21,7 +23,12 @@ ReactDOM.render(
         <Routes>
             <Route path="/" element={<App />}>
                 <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login />}>
+                    <Route path="/login" element={<LoginInput/>}/>
+                </Route>
+                <Route path="/signup" element={<Login />} >
+                    <Route path="/signup" element={<SignupInput/>}/>
+                </Route>
                 <Route path="/signup" element={<Login/>} />
                 <Route path="/book" element={<Book />} />
                 <Route path="/bookings" element={<Bookings />} />

@@ -3,6 +3,7 @@ import MoviesContext from '../contexts/Movies'
 
 class Showing extends Component {
     static contextType = MoviesContext
+
     state = {
         index:1,
         movies:0,
@@ -19,7 +20,7 @@ class Showing extends Component {
         this.setState({picList: posterURLS, titles:titles}, () => {
             const movies = this.state.picList.map((movie, index) => {
                 return (
-                    <div className="flex flex-col flex-none items-center py-10">
+                    <div className="flex flex-col flex-none items-center py-10" key={index}>
                         <img src={movie} alt="this is a movie" className="h-56 text-theme-black"/>
                         <span>{titles[index]}</span>
                     </div>

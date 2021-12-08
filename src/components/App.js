@@ -1,64 +1,73 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { Outlet, Routes, Route } from "react-router-dom"
 import Header from './Header'
-import Background from './background'
 import Showing from './Showing'
 import MovieContext from '../contexts/Movies.js'
-import database from './Firebase.js'
+import UserDetails from '../contexts/userDetails'
+import loginInputContext from '../contexts/InputInfo'
+import database, {auth} from './Firebase.js'
 import SyncLoader from 'react-spinners/SyncLoader'
+import Background from './background'
 
-class App extends Component {
-  state= {
-    Status:"idle"
-  }
-  movies = [] 
 
-  componentDidMount() {
-    database.ref('movies').on("value", (snapshot) => {
+const App = () => {
+  const [status, setStatus] = useState('idle')
+  const [input, setInput] = useState({"email":"", "password":"", "phone":"", "name":""})
+  const [userDetails, setUserDetails] = useState({"displayName":""})
+  const movies = useRef([])
+
+  useEffect(()=>{
+    const updatedMovies = []
+
+    database.ref('movies').once("value", (snapshot) => {
       snapshot.forEach(snap => {
-        this.movies.push(snap.val());
+        updatedMovies.push(snap.val())
       })
-      this.setState({
-        Status:"resolved"
-      })
+      movies.current = updatedMovies
+      setStatus("resolved")
     })
 
+    auth.onAuthStateChanged((user) => {
+      if (userDetails.displayName !== user.displayName) {
+        setUserDetails({"displayName":user.displayName})
+      }
+    })
+  },[userDetails.displayName])
+
+  if (status === 'idle') {
+    return(
+      <div className="flex h-screen w-full items-center justify-center">
+        <Background />
+        <SyncLoader color="#2B7A78"/>
+      </div>
+      )
   }
-  render() {
-    if (this.state.Status === 'idle') {
-      return(
-        <div className="flex h-screen w-full items-center justify-center">
-          <Background/>
-          <SyncLoader color="#2B7A78"/>
-        </div>
-        )
-    }
-    else if (this.state.Status === 'resolved') {
-      return (
-        <MovieContext.Provider value={this.movies}>
-          <div className="">
-            <div className="fixed left-0 right-0 top-0 z-50">
-              <Header/>
-            </div>
-
-            <div className="h-screen w-full justify-center pt-40 p-20 flex">
-              <Outlet/>
-            </div>
-
-            <div className="flex" >
-              <Routes>
-                <Route path="/" element={<Showing/>} />
-              </Routes>
-            </div>
-
-            <Background/>
+  else if (status === 'resolved') {
+    return (
+      <UserDetails.Provider value={{userDetails, setUserDetails}}>
+      <MovieContext.Provider value={movies.current}> 
+        <div className="">
+          <div className="fixed left-0 right-0 top-0 z-50">
+            <Header/>
           </div>
-        </MovieContext.Provider>
-    )}
-    else if (this.state.Status === 'rejected') {
-      return(<div>hi</div>)
-    }
-  }
+
+          <div className="h-screen w-full justify-center pt-40 p-20 flex">
+            <loginInputContext.Provider value={{input, setInput}}>
+              <Outlet/>
+            </loginInputContext.Provider>
+          </div>
+
+          <div className="flex" >
+            {/* This is temp for getting showing to work */}
+            <Routes> 
+              <Route path="/" element={<Showing/>} />
+            </Routes>
+          </div>
+          <Background/>
+        </div>
+      </MovieContext.Provider>
+      </UserDetails.Provider>
+  )}
 }
 
 export default App

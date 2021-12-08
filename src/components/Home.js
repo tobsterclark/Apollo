@@ -59,9 +59,10 @@ class Home extends Component {
 
     componentDidMount() {
         this.mounted = true
-        const posterURLS = [] // eslint-disable-next-line
+        const posterURLS = []
         this.context.map((movies) => {
             posterURLS.push(movies.posterURL)
+            return("movies added from context")
         })
         this.setState({picList: posterURLS})
 
@@ -69,14 +70,12 @@ class Home extends Component {
             this.increaseMovieIndex()
         }, 5000);
     
-        if(this.mounted) {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    intervalId: newIntervalId,
-                }
-            })
-        }
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                intervalId: newIntervalId,
+            }
+        })
 
         return () => this.mounted = false
     }
