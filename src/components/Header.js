@@ -51,11 +51,11 @@ const Header = () => {
                     <Link to="/" className="py-3 hover:text-theme-black">Home</Link>
                     <Link to="/bookings" className="py-3 hover:text-theme-black">My Bookings</Link>
                     <Link to={loginUserPath} className="py-3 hover:text-theme-black">{loginUser}</Link>
-                    <Link to="/book" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
+                    <Link to="/book/movie" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
                 </div>
 
                 <div className="sm:hidden flex items-center gap-x-7">
-                <Link to="/book" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
+                <Link to="/book/movie" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
                     <button onClick={handleClick}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#FEFFFF">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

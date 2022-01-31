@@ -5,6 +5,8 @@ import Showing from './Showing'
 import MovieContext from '../contexts/Movies.js'
 import UserDetails from '../contexts/userDetails'
 import loginInputContext from '../contexts/InputInfo'
+import currentTicket from '../contexts/currentTicket'
+import timeslotsContext from '../contexts/timeslots'
 import database, {auth} from './Firebase.js'
 import SyncLoader from 'react-spinners/SyncLoader'
 import Background from './background'
@@ -13,11 +15,14 @@ import Background from './background'
 const App = () => {
   const [status, setStatus] = useState('idle')
   const [input, setInput] = useState({"email":"", "password":"", "phone":"", "name":""})
+  const [ticketDetails, setTicketDetails] = useState({"movieID":"0", "time":"0", "seating":"0", "food":null, "foodOption":"0", "foodTime":"0"})
+  const [timeslots, setTimeslots] = useState({1:{"date":"0", "movie":"1", "seating":"test"}})
   const [userDetails, setUserDetails] = useState({"displayName":""})
   const movies = useRef([])
 
   useEffect(()=>{
     const updatedMovies = []
+
 
     database.ref('movies').once("value", (snapshot) => {
       snapshot.forEach(snap => {
@@ -45,7 +50,9 @@ const App = () => {
   else if (status === 'resolved') {
     return (
       <UserDetails.Provider value={{userDetails, setUserDetails}}>
-      <MovieContext.Provider value={movies.current}> 
+      <MovieContext.Provider value={movies.current}>
+      <currentTicket.Provider value={{ticketDetails, setTicketDetails}}> 
+      <timeslotsContext.Provider value={{timeslots, setTimeslots}}>
         <div className="">
           <div className="fixed left-0 right-0 top-0 z-50">
             <Header/>
@@ -65,6 +72,8 @@ const App = () => {
           </div>
           <Background/>
         </div>
+      </timeslotsContext.Provider>
+      </currentTicket.Provider>
       </MovieContext.Provider>
       </UserDetails.Provider>
   )}

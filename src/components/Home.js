@@ -99,7 +99,7 @@ class Home extends Component {
 
                 {/* Buttons for movie nav & book now button */}
 
-                <div className="inset-10 flex gap-x-14 md:gap-x-44 items-center justify-center absolute h-screen">
+                <div className="inset-10 flex gap-x-14 md:gap-x-44 items-center justify-center absolute h-screen text-center">
                     <button onClick={() => this.decreaseMovieIndex()} className="bg-theme-black rounded-full py-1 px-1">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#DEF2F1">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

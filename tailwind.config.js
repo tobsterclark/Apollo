@@ -1,7 +1,10 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      'sans': ['Lekton', 'sans-serif']
+    },
     extend: {
         colors: {
           transparent: 'transparent',
@@ -13,8 +16,9 @@ module.exports = {
             light: '#DEF2F1',
             white: '#FEFFFF'
           }
-        }
+        },
     }
+    
   },
   variants: {
     extend: {},
