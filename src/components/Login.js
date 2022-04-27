@@ -31,14 +31,14 @@ const Login = (props) => {
                     auth.currentUser.updateProfile({displayName:name, name:name}).then(() => {
                         setUserDetails({"displayName":userCreds.user.displayName})
                         navigate(-1)
-                    }).catch(()=>{console.log("error creating account")})
-                }).catch(()=>{console.log("error creating account - username and password may be not formatted")})
+                    }).catch(()=>{alert("error creating account")})
+                }).catch(()=>{alert("error creating account - username and password may be not formatted (min 6 characters for the password)")})
         } else {
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCreds) => {
                     setUserDetails({"displayName":userCreds.user.displayName})
                     navigate(-1)
-                }).catch(()=>{console.log("error logging in - username and password may be not right")})
+                }).catch(()=>{alert("error logging in - username and password may be not right")})
         }
     }
 
@@ -47,11 +47,11 @@ const Login = (props) => {
             <div className="bg-theme-white h-full w-full text-sm md:text-2xl lg:text-4xl lg:w-2/5 font-sans font-light text-theme-black text-center z-10 rounded-lg flex justify-between flex-col py-10">
                 <div className="flex md:gap-x-5 px-10 mb-2 justify-center items-center">
                     <Link to="/login" className={loginStyles}>Log In</Link>
-                    <Link to="/signup" className={signupStyles}>Sign Up</Link>
+                    <Link to="/signup" className={signupStyles}>Sign Up</Link> 
                 </div>
                 <Outlet />
                 <div>
-                    <button className="bg-theme rounded-xl font-extralight mt-5 py-2 px-10 hover:bg-theme-black hover:text-theme shadow-lg" onClick={() => onSubmit()}>Submit</button>
+                    <button className="mt-5 py-2 px-10 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => onSubmit()}>Submit</button>
                 </div>
                 
             </div>

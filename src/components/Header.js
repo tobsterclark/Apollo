@@ -20,7 +20,6 @@ const Header = () => {
     }
 
     useEffect(() => {
-        console.log(userDetails.displayName)
         if (userDetails.displayName !== "") {
             setLoginUser(userDetails.displayName)
             setLoginUserPath("/settings")

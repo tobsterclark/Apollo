@@ -68,7 +68,7 @@ const Time = (props) => {
 
             if (date !== "") {
                 timeslotOutput.push(
-                    <button key={eachDay[3]} className="flex flex-col shadow-inner items-center p-10 py-11 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
+                    <button key={eachDay[3]} className="transition duration-150 flex flex-col shadow-inner items-center p-10 py-11 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
                         <span>{date}</span>
                         {eachDay[0]}
     
@@ -77,7 +77,7 @@ const Time = (props) => {
                 )
             } else if (todaysDate.getTime()/1000 < eachDay[2]){
                 timeslotOutput.push(
-                    <button key={eachDay[3]} className="flex flex-col items-center shadow-inner p-10 py-14 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
+                    <button key={eachDay[3]} className="transition duration-150 flex flex-col shadow-inner items-center p-10 py-14 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
                         <span>{eachDay[0]}</span>
     
                         <span>{eachDay[1]}</span>

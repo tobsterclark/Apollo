@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import timeslotContexts from '../contexts/timeslots'
+import foodContext from '../contexts/foodContext'
 import database from './Firebase'
 import { Outlet, useNavigate } from 'react-router'
 import {auth} from './Firebase.js'
@@ -8,6 +9,7 @@ import {auth} from './Firebase.js'
 
 const Book = (props) => {
     const { setTimeslots} = useContext(timeslotContexts)
+    const { setFood } = useContext(foodContext)
     const [status, setStatus] = useState('idle')
     let navigate = useNavigate()
     const cookies = false
@@ -20,7 +22,18 @@ const Book = (props) => {
             })
             setTimeslots(timeslots)
         })
-    }, [setTimeslots])
+
+        const food = {}
+
+        
+        database.ref('food').once("value", (snapshot) => {
+            snapshot.forEach(snap => {
+                food[snap.key] = snap.val()
+            })
+        })
+
+        setFood(food)
+    }, [setTimeslots, setFood])
     
     useEffect(() => {
         // add cookies here

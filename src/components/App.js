@@ -7,6 +7,7 @@ import UserDetails from '../contexts/userDetails'
 import loginInputContext from '../contexts/InputInfo'
 import currentTicket from '../contexts/currentTicket'
 import timeslotsContext from '../contexts/timeslots'
+import foodContext from '../contexts/foodContext'
 import database, {auth} from './Firebase.js'
 import SyncLoader from 'react-spinners/SyncLoader'
 import Background from './background'
@@ -15,6 +16,7 @@ import Background from './background'
 const App = () => {
   const [status, setStatus] = useState('idle')
   const [input, setInput] = useState({"email":"", "password":"", "phone":"", "name":""})
+  const [food, setFood] = useState({1:{"food":"", "price":"", "stock":""}})
   const [ticketDetails, setTicketDetails] = useState({"movieID":"0", "time":"0", "seating":"0", "food":null, "foodOption":"0", "foodTime":"0"})
   const [timeslots, setTimeslots] = useState({1:{"date":"0", "movie":"1", "seating":"test"}})
   const [userDetails, setUserDetails] = useState({"displayName":""})
@@ -42,7 +44,6 @@ const App = () => {
       const user = auth.currentUser
       
       if (auth.currentUser) {
-        console.log(user.displayName)
         if (userDetails.displayName !== user.displayName) {
           setUserDetails({"displayName":user.displayName})
         }
@@ -71,6 +72,7 @@ const App = () => {
       <MovieContext.Provider value={movies.current}>
       <currentTicket.Provider value={{ticketDetails, setTicketDetails}}> 
       <timeslotsContext.Provider value={{timeslots, setTimeslots}}>
+      <foodContext.Provider value={{food, setFood}}>
         <div className="">
           <div className="fixed left-0 right-0 top-0 z-50">
             <Header/>
@@ -90,6 +92,7 @@ const App = () => {
           </div>
           <Background/>
         </div>
+      </foodContext.Provider>
       </timeslotsContext.Provider>
       </currentTicket.Provider>
       </MovieContext.Provider>

@@ -41,12 +41,14 @@ const Completed = (props) => {
                     
                         dbTicketRef.set({
                             "customer":user.uid,
-                            "food":food+foodOption+foodTime,
+                            "food":food+"/"+foodOption+"/"+foodTime,
                             "movie":movieID,
                             "seat":seating,
                             "time":time
                         })
                         navigate("/")
+                    } else {
+                        alert("That seat has been booked! Choose another seat and try again")
                     }
                 }
             })
@@ -57,7 +59,7 @@ const Completed = (props) => {
     }
 
     const timeChosen = () => {
-        console.log(time)
+
         const date = new Date(time * 1000)
         const formattedDayMonth = date.getDate()+"/"+(date.getMonth()+1)
         const formattedTime = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
@@ -65,26 +67,29 @@ const Completed = (props) => {
         return (formattedDayMonth + " " + formattedTime)
     }
 
+    const foodChosen = () => {
+        if (food === false) { return "No food chosen"}
+        else { return foodOption + " selected, delivered " + foodTime + " minutes into the movie"}
+    }
+
     return (
         <div className="flex flex-col justify-between items-center h-full w-full p-10">
-            <div className="py-5 text-4xl">
+            <div className="text-4xl">
                 <span>Confirm Choices</span>
             </div>
             {/* any bookings */}
 
             <div className="flex flex-col divide-y divide-black px-10 items-center">
-                <Link to="/book/movie" state="Completed" className="py-5 px-20">
+                <Link to="/book/movie" state="Completed" className="py-4 px-20">
                     {movie()}
                 </Link>
-                <Link to="/book/time" state="Completed" className="py-5 w-52 text-center">{timeChosen()}</Link>
-                <Link to="/book/seating" state="Completed" className="py-5 w-52 text-center">your seat: {seating}</Link>
-                <Link to="/book/food" state="Completed" className="py-5 w-52 text-center">
-                    <span>food options</span>
-                </Link>
+                <Link to="/book/time" state="Completed" className="py-4 w-52 text-center">{timeChosen()}</Link>
+                <Link to="/book/seating" state="Completed" className="py-4 w-52 text-center">your seat: {seating}</Link>
+                <Link to="/book/food" state="Completed" className="py-4 w-52 text-center"><span>{foodChosen()}</span></Link>
             </div>
 
             {/* do a bunch of fancy stuff to check if the seat and food is still available and update the database*/}
-            <button className="p-3 px-8 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black" onClick={() => submit()}>Submit</button>
+            <button className="p-3 px-8 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => submit()}>Submit</button>
         </div>
     )  
 }

@@ -37,7 +37,7 @@ const Seating = (props) => {
         if (currentSeat === seat) {
             return("text-theme")
         } else {
-            return("text-theme-light hover:text-theme-dark")
+            return("text-theme-light hover:text-theme-dark transition duration-150")
         }
     }
 
@@ -103,7 +103,7 @@ const Seating = (props) => {
                 {fillTimeslots()}
             </div>
 
-            <button className="px-8 p-3 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black" onClick={() => onClickSubmit()}>Proceed</button>
+            <button className="p-3 px-8 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => onClickSubmit()}>Proceed</button>
         </div>
     )  
 }

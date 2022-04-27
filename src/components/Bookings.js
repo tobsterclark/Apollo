@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {auth} from './Firebase.js'
 import database from './Firebase'
+import MoviesContext from '../contexts/Movies'
 import {Link} from "react-router-dom"
 
 
 
 const Book = (props) => {
+    const movieContext = useContext(MoviesContext)
     const [tickets, setTickets] = useState("")
     useEffect(() => {
         if (auth.currentUser !== null) {
@@ -19,29 +21,37 @@ const Book = (props) => {
         }).then(() => {
             setTickets(databaseTickets.reverse())
         })}
-    }, [])
+
+    }, [movieContext])
 
     const grabData = () => {
         const output = []
 
         for (let i in tickets) {
             output.push(
-            <div className="flex flex-col m-5 text-center">
+            <div key={i} className="flex flex-col p-5 text-center">
+                <span>Movie: {movieContext[tickets[i].movie].movieName}</span>
                 <span>seat: {tickets[i].seat}</span>
                 <span>customerID: {tickets[i].customer}</span>
                 <span>time: {unixToUser(tickets[i].time)}</span>
-                <span>food: {tickets[i].food}</span>
+                <span>{foodChosen(tickets[i].food)}</span>
             </div>)
         }
         
         return(output)
     }
 
+    const foodChosen = (foodString) => {
+        const [food, foodOption, foodTime] = foodString.split("/")
+
+        if (food === "false") { return "No food chosen"}
+        else { return foodOption + " selected, delivered " + foodTime + " minutes into the movie"}
+    }
+
     const unixToUser = (unix) => {
-        console.log(unix)
         const date = new Date(unix * 1000)
         const dayMonth = date.getDate()+"/"+(date.getMonth()+1)
-        const time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        const time = date.getHours()+":"+date.getMinutes()
 
         return(time + " " + dayMonth)
     }
@@ -65,7 +75,7 @@ const Book = (props) => {
                 </div>
                 {/* any bookings */}
 
-                <div className="overflow-y-auto">
+                <div className="overflow-y-auto divide-y">
                     {grabData()}
                 </div>
 
