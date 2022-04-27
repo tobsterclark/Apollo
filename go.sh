@@ -23,3 +23,4 @@ firebase deploy --except functions
 }
 
 do_it | tee -a ${SRC_DIR}/log.txt
+
