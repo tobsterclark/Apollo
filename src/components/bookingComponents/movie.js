@@ -24,13 +24,13 @@ const Movie = (props) => {
     const movies = () => {
         const output = movieContext.map((movies, index) => {
             return(
-                <button className="flex gap-x-10 items-center p-3 text-sm px-10" onClick={() => chooseMovie(index)} key={index}>
-                    <img src={movies.posterURL} alt="example movie" className="h-28"/>
+                <button className="flex gap-x-5 items-center p-3 text-sm px-5 flex-none" onClick={() => chooseMovie(index)} key={index}>
+                    <img src={movies.posterURL} alt="movie poster" className="h-28"/>
                     
                     <div className="flex flex-col items-start">
                         <span className="font-bold text-md">{movies.movieName}</span>
                         <div className="flex gap-x-1">
-                            <div className="flex-col flex gap-y-1 items-start pr-5">
+                            <div className="flex-col flex gap-y-1 items-start">
                                 <span>Duration: {movies.length}</span>
                                 <span>Cost: {movies.price}</span>
                                 <span>Rating: {movies.rating}</span>
@@ -43,12 +43,12 @@ const Movie = (props) => {
             )
         })
 
-        return(<div className="divide-y divide-black">{output}</div>)
+        return(<div className="flex flex-wrap justify-center">{output}</div>)
     }
 
     return (
-        <div className="flex flex-col justify-between items-center h-full w-full">
-            <div className="py-5 text-4xl">
+        <div className="flex flex-col items-center h-full w-full">
+            <div className="py-5 mb-16 text-4xl">
                 <span>Book a Movie</span>
             </div>
             {/* any bookings */}
@@ -57,8 +57,6 @@ const Movie = (props) => {
                 {movies()}
             </div>
 
-            {/* placeholder div to center the bookings */}
-            <div />
         </div>
     )  
 }

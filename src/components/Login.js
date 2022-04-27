@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
 import loginInputContext from '../contexts/InputInfo'
 import userDetailsContext from '../contexts/userDetails'
-import {Outlet, Link, useLocation} from "react-router-dom"
+import {Outlet, Link, useLocation, useNavigate} from "react-router-dom"
 import {auth} from './Firebase.js'
 
 
@@ -9,10 +9,10 @@ const Login = (props) => {
     const { input } = useContext(loginInputContext)
     const { setUserDetails } = useContext(userDetailsContext)
     const {email, password, phone, name} = input
+    const navigate = useNavigate()
     const {pathname} = useLocation()
     const [loginStyles, setLoginStyles] = useState("")
     const [signupStyles, setSignupStyles] = useState("")
-
 
     useEffect(() => {
         if (pathname === "/signup"){
@@ -30,12 +30,14 @@ const Login = (props) => {
                 .then((userCreds) => {
                     auth.currentUser.updateProfile({displayName:name, name:name}).then(() => {
                         setUserDetails({"displayName":userCreds.user.displayName})
+                        navigate(-1)
                     }).catch(()=>{console.log("error creating account")})
                 }).catch(()=>{console.log("error creating account - username and password may be not formatted")})
         } else {
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCreds) => {
                     setUserDetails({"displayName":userCreds.user.displayName})
+                    navigate(-1)
                 }).catch(()=>{console.log("error logging in - username and password may be not right")})
         }
     }

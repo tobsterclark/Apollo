@@ -13,7 +13,7 @@ const Time = (props) => {
     let navigate = useNavigate()
 
 
-    const onClick = (time) => {
+    const chooseTimeslot = (time) => {
         setTicketDetails({"movieID":movieID, "time":time, "seating":seating, "food":food, "foodOption":foodOption, "foodTime":foodTime})
 
         if (prevPage === "Completed") {
@@ -23,43 +23,72 @@ const Time = (props) => {
         }
     }
 
+
     const timeslotsForMovie = () => {
         const movie = ticketDetails.movieID
-        const timeslotObject = {}
+        const movieTimeslots = []
 
-        timeslots.sort(function (a, b) {
-            return (a.date - b.date)
-        })
-
-        timeslots.forEach((eachTimeslot) => {
+        for (const key in timeslots) {
+            const eachTimeslot = timeslots[key]
             if (eachTimeslot.movie === movie) {
                 const date = new Date(eachTimeslot.date * 1000)
+                const time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+                const day = date.getDate()+"/"+(date.getMonth()+1)
 
-                console.log(date.getDate()+"/"+(date.getMonth()+1))
-
-                timeslotObject[date.getDate()+"/"+(date.getMonth()+1)] += (date.getHours()+":"+date.getMinutes()+":"+date.getSeconds())
-                timeslotObject[date.getDate()+"/"+(date.getMonth()+1)] += ((date.getHours()+4)+":"+date.getMinutes()+":"+date.getSeconds())
-
+                movieTimeslots.push([day, time, eachTimeslot.date, key])
             }
+        }
+
+        movieTimeslots.sort(function (a, b) {
+            return (a[2] - b[2])
         })
 
-        return(timeslotObject)
+        return(movieTimeslots)
     }
 
     const fillTimeslots = () => {
         const currentMovieTimeslots = timeslotsForMovie()
+        const todaysDate = new Date()
+        todaysDate.setHours(0, 0, 0, 0)
 
-        console.log(currentMovieTimeslots)
+        const formattedDate = todaysDate.getDate()+"/"+(todaysDate.getMonth()+1)
+        
+        // Setting the next days date
+        const tomorrowsDate = new Date()
+        tomorrowsDate.setDate(todaysDate.getDate()+1)
+        const tomorrow = tomorrowsDate.getDate()+"/"+(tomorrowsDate.getMonth()+1)
 
-        for (const eachDay in currentMovieTimeslots) {
-            console.log(eachDay, currentMovieTimeslots[eachDay])
-            for (const eachTimeslot in currentMovieTimeslots[eachDay]) {
+        var timeslotOutput = []
+
+        currentMovieTimeslots.forEach((eachDay) => {
+            var date = ""
+
+            if(eachDay[0] === formattedDate) { date = "Today" }
+            else if (eachDay[0] === tomorrow) { date = "Tomorrow"}
+
+            if (date !== "") {
+                timeslotOutput.push(
+                    <button key={eachDay[3]} className="flex flex-col shadow-inner items-center p-10 py-11 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
+                        <span>{date}</span>
+                        {eachDay[0]}
+    
+                        <span>{eachDay[1]}</span>
+                    </button>
+                )
+            } else if (todaysDate.getTime()/1000 < eachDay[2]){
+                timeslotOutput.push(
+                    <button key={eachDay[3]} className="flex flex-col items-center shadow-inner p-10 py-14 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseTimeslot(eachDay[2])}>
+                        <span>{eachDay[0]}</span>
+    
+                        <span>{eachDay[1]}</span>
+                    </button>
+                )
             }
-        }
+        })
 
         return(
-            <div className="flex flex-col">
-                
+            <div className="flex items-center align-middle space-x-2 px-2 pb-5">
+                {timeslotOutput}
             </div>
             )
     }
@@ -67,13 +96,14 @@ const Time = (props) => {
 
     return (
         <div className="flex flex-col justify-between items-center h-full w-full">
-            <div className="py-5 text-4xl">
+            <div className="pt-20 text-4xl">
                 <span>Choose the time of your movie</span>
             </div>
 
-            <div className="overflow-y-auto px-10 text-center">
+            <div className="overflow-x-auto text-center w-full">
                 {fillTimeslots()}
             </div>
+
             <div />
         </div>
     )  

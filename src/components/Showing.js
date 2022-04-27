@@ -34,7 +34,7 @@ class Showing extends Component {
             <div className="bg-white z-10 w-full py-20">
                 <div className="flex flex-col items-center gap-y-20 font-sans font-light">
                     <span className="text-4xl text-theme-black">Now Showing</span>
-                    <div className="flex flex-wrap items-center justify-center gap-x-20 ">
+                    <div className="flex flex-wrap items-center justify-center gap-x-20 mx-5">
                         {this.state.movies}
                     </div>
                 </div>

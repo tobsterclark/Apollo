@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import currentTicket from '../../contexts/currentTicket'
 import MoviesContext from '../../contexts/Movies'
-import timeslotsContext from '../../contexts/timeslots'
 import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router'
 import database, {auth} from '.././Firebase.js'
@@ -10,7 +9,6 @@ import database, {auth} from '.././Firebase.js'
 const Completed = (props) => {
     const movieContext = useContext(MoviesContext)
     const {ticketDetails} = useContext(currentTicket)
-    const { timeslots } = useContext(timeslotsContext)
     const navigate = useNavigate()
     const {movieID, time, seating, food, foodOption, foodTime} = ticketDetails
 
@@ -30,11 +28,10 @@ const Completed = (props) => {
         const user = auth.currentUser
         const dbTicketRef = database.ref("/tickets/"+Date.now())
         const dbTimeslotRef = database.ref('timeslots')
-        const epochTime = timeChosen()
 
         dbTimeslotRef.once("value", (snapshot) => {
             snapshot.forEach(snap => {
-                if (snap.val().date === epochTime) {
+                if (snap.val().date === time) {
                     const [row, seat] = seating.split("")
                     const ticketSeating = snap.val().seating
                     if (ticketSeating[row][seat] !== "T") {
@@ -47,7 +44,7 @@ const Completed = (props) => {
                             "food":food+foodOption+foodTime,
                             "movie":movieID,
                             "seat":seating,
-                            "time":epochTime
+                            "time":time
                         })
                         navigate("/")
                     }
@@ -60,12 +57,16 @@ const Completed = (props) => {
     }
 
     const timeChosen = () => {
-        const timeslotChosen = timeslots[time]
-        return(timeslotChosen.date)
+        console.log(time)
+        const date = new Date(time * 1000)
+        const formattedDayMonth = date.getDate()+"/"+(date.getMonth()+1)
+        const formattedTime = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+
+        return (formattedDayMonth + " " + formattedTime)
     }
 
     return (
-        <div className="flex flex-col justify-between items-center h-full w-full">
+        <div className="flex flex-col justify-between items-center h-full w-full p-10">
             <div className="py-5 text-4xl">
                 <span>Confirm Choices</span>
             </div>
@@ -83,7 +84,7 @@ const Completed = (props) => {
             </div>
 
             {/* do a bunch of fancy stuff to check if the seat and food is still available and update the database*/}
-            <button onClick={() => submit()}>Submit</button>
+            <button className="p-3 px-8 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black" onClick={() => submit()}>Submit</button>
         </div>
     )  
 }

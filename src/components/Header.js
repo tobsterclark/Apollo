@@ -20,14 +20,15 @@ const Header = () => {
     }
 
     useEffect(() => {
+        console.log(userDetails.displayName)
         if (userDetails.displayName !== "") {
             setLoginUser(userDetails.displayName)
-            setLoginUserPath("/login")
+            setLoginUserPath("/settings")
         } else {
             setLoginUser("Log in")
             setLoginUserPath("/login")            
         }
-    }, [userDetails])
+    }, [userDetails.displayName])
 
     return (
 
@@ -51,7 +52,7 @@ const Header = () => {
                     <Link to="/" className="py-3 hover:text-theme-black">Home</Link>
                     <Link to="/bookings" className="py-3 hover:text-theme-black">My Bookings</Link>
                     <Link to={loginUserPath} className="py-3 hover:text-theme-black">{loginUser}</Link>
-                    <Link to="/book/movie" className="bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
+                    <Link to="/book/movie" className="shadow-2xl bg-theme-light rounded-2xl text-theme-black py-3 px-3 hover:bg-theme-black hover:text-theme-white transition duration-150">Make Booking</Link>
                 </div>
 
                 <div className="sm:hidden flex items-center gap-x-7">

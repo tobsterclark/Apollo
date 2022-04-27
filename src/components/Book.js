@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import timeslotContexts from '../contexts/timeslots'
 import database from './Firebase'
 import { Outlet, useNavigate } from 'react-router'
+import {auth} from './Firebase.js'
 
 
 
@@ -13,9 +14,9 @@ const Book = (props) => {
 
     useEffect(() => {
         database.ref('timeslots').once("value", (snapshot) => {
-            const timeslots = []
+            const timeslots = {}
             snapshot.forEach(snap => {
-                timeslots.push(snap.val())
+                timeslots[snap.key] = snap.val()
             })
             setTimeslots(timeslots)
         })
@@ -24,11 +25,18 @@ const Book = (props) => {
     useEffect(() => {
         // add cookies here
 
-        if (cookies === false) {
-            navigate("/book/movie")
-            setStatus('resolved')
+        if (auth.currentUser === null) {
+            alert("You need to be signed in to book a movie!")
+
+            navigate("/login")
+
         } else {
-            setStatus('resolved')
+            if (cookies === false) {
+                navigate("/book/movie")
+                setStatus('resolved')
+            } else {
+                setStatus('resolved')
+            }
         }
 
     // Disabling the warning for using navigate in useEffect and not including it as a dependency

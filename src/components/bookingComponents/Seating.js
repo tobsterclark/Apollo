@@ -15,19 +15,23 @@ const Seating = (props) => {
 
 
     const onClickSubmit = () => {
-        setTicketDetails({"movieID":movieID, "time":time, "seating":seat, "food":food, "foodOption":foodOption, "foodTime":foodTime})
 
-        if (prevPage === "Completed") {
-            navigate('/book/completed', {state:"Completed"})
+        if (seat !== "") {
+            setTicketDetails({"movieID":movieID, "time":time, "seating":seat, "food":food, "foodOption":foodOption, "foodTime":foodTime})
+
+
+            if (prevPage === "Completed") {
+                navigate('/book/completed', {state:"Completed"})
+            } else {
+                navigate('/book/food', {state:"Seating"})
+            }
         } else {
-            navigate('/book/food', {state:"Seating"})
+            alert("You must choose a seat before continuing!")
         }
-    }
-
-    const onClickSeat = (currentSeat) => {
-        setSeat(currentSeat)
 
     }
+
+    const onClickSeat = (currentSeat) => { setSeat(currentSeat) }
 
     const seatStyles = (currentSeat) => {
         if (currentSeat === seat) {
@@ -38,9 +42,11 @@ const Seating = (props) => {
     }
 
     const fillTimeslots = () => {
+        var timeslotForMovie = ""
 
-        const timeslotForMovie = timeslots.map((eachTimeslot, index) => {
-            if (ticketDetails.time === Object.keys(timeslots)[index]) {
+        for (const index in timeslots) {
+            const eachTimeslot = timeslots[index]
+            if (ticketDetails.time === eachTimeslot.date) {
                 const seating = eachTimeslot.seating
                 const rows = []
 
@@ -68,16 +74,14 @@ const Seating = (props) => {
 
                     rows.push(<div className="flex gap-x-1 items-center" key={i}>{i}  {seats}</div>)
                 }
-
-                return(<div key={index} className="">{rows}</div>)
-            } else {
-                return(<div key={index} />)
+                
+                timeslotForMovie = rows
             }
-        })
+        }
 
         return(
             <div className="flex flex-col items-center">
-                <svg height="48" width="144" xmlns="http://www.w3.org/2000/svg" className='mb-20'>
+                <svg height="48" width="144" xmlns="http://www.w3.org/2000/svg" className='mb-10'>
                     <g>
                         <rect x="0" y="0" width="144" height="48" fill="white" stroke="black" strokeWidth="3"></rect>
                         <text x="36" y="34" className="text-2xl font-sans font-light">Screen</text>
@@ -89,8 +93,8 @@ const Seating = (props) => {
     }
 
     return (
-        <div className="flex flex-col justify-between text-center items-center h-full w-full">
-            <div className="text-4xl flex justify-center py-10 flex-col w-full">
+        <div className="flex flex-col justify-between text-center items-center p-10 h-full w-full">
+            <div className="text-4xl flex justify-center p-10 flex-col w-full">
                 <span className="items-center divide-none">Book a Movie</span>
             </div>
             {/* any bookings */}
@@ -99,8 +103,7 @@ const Seating = (props) => {
                 {fillTimeslots()}
             </div>
 
-            {/* placeholder div to center the bookings */}
-            <button className="p-10" onClick={() => onClickSubmit()}>Proceed</button>
+            <button className="px-8 p-3 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black" onClick={() => onClickSubmit()}>Proceed</button>
         </div>
     )  
 }

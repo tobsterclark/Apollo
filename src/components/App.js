@@ -18,11 +18,13 @@ const App = () => {
   const [ticketDetails, setTicketDetails] = useState({"movieID":"0", "time":"0", "seating":"0", "food":null, "foodOption":"0", "foodTime":"0"})
   const [timeslots, setTimeslots] = useState({1:{"date":"0", "movie":"1", "seating":"test"}})
   const [userDetails, setUserDetails] = useState({"displayName":""})
+  const [initialLoad, setinitialLoad] = useState(true)
   const movies = useRef([])
 
+
+  //Only run on first load of website
   useEffect(()=>{
     const updatedMovies = []
-
 
     database.ref('movies').once("value", (snapshot) => {
       snapshot.forEach(snap => {
@@ -31,13 +33,29 @@ const App = () => {
       movies.current = updatedMovies
       setStatus("resolved")
     })
+  },[])
 
-    auth.onAuthStateChanged((user) => {
-      if (userDetails.displayName !== user.displayName) {
-        setUserDetails({"displayName":user.displayName})
+
+  //Checking if user is logged on (forcing rerender if user status changes)
+  useEffect(() => {
+    const initialUserCheck = () => {
+      const user = auth.currentUser
+      
+      if (auth.currentUser) {
+        console.log(user.displayName)
+        if (userDetails.displayName !== user.displayName) {
+          setUserDetails({"displayName":user.displayName})
+        }
+      } else if (auth.currentUser === null && userDetails.displayName !== "") {
+        setUserDetails({"displayName":""})
       }
-    })
-  },[userDetails.displayName])
+    }
+
+    if (initialLoad && status === 'resolved') {
+      initialUserCheck()
+      setinitialLoad(false)
+    }
+  }, [status, initialLoad, userDetails])
 
   if (status === 'idle') {
     return(
