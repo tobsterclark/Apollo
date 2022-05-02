@@ -1,20 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useContext, useEffect, useState} from 'react'
 import timeslotContexts from '../contexts/timeslots'
+import currentTicket from '../contexts/currentTicket'
 import foodContext from '../contexts/foodContext'
 import database from './Firebase'
-import { Outlet, useNavigate } from 'react-router'
+import { Outlet, useNavigate, useLocation } from 'react-router'
 import {auth} from './Firebase.js'
+import toast from 'react-hot-toast'
 
 
 
 const Book = (props) => {
+    const {ticketDetails, setTicketDetails} = useContext(currentTicket)
+    const { time, food, foodOption, foodTime, seating } = ticketDetails
     const { setTimeslots} = useContext(timeslotContexts)
     const { setFood } = useContext(foodContext)
     const [status, setStatus] = useState('idle')
     let navigate = useNavigate()
+    const { state } = useLocation()
+    var movieSelected = state
     const cookies = false
 
+
+    //not sure why I do this twice
     useEffect(() => {
+
         database.ref('timeslots').once("value", (snapshot) => {
             const timeslots = {}
             snapshot.forEach(snap => {
@@ -39,21 +49,27 @@ const Book = (props) => {
         // add cookies here
 
         if (auth.currentUser === null) {
-            alert("You need to be signed in to book a movie!")
+            toast.error("You need to be signed in to book a movie!")
 
-            navigate("/login")
+            navigate("/login", {state:{prev:"/book"}})
 
         } else {
-            if (cookies === false) {
+            if (movieSelected === null) {
+                movieSelected = ""
+            }
+
+            const movieFormatted = movieSelected.split(",")
+            if (movieFormatted[0] === "movie") {
+                setTicketDetails({"movieID":parseInt(movieFormatted[1]), "time":time, "seating":seating, "food":food, "foodOption":foodOption, "foodTime":foodTime})
+                navigate("/book/time")
+                setStatus('resolved')
+            } else if (cookies === false) {
                 navigate("/book/movie")
                 setStatus('resolved')
             } else {
                 setStatus('resolved')
             }
         }
-
-    // Disabling the warning for using navigate in useEffect and not including it as a dependency
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cookies])
 
     if (status === 'idle') {return(<span className="flex justify-center text-center">loading</span>)}

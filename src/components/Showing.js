@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import MoviesContext from '../contexts/Movies'
+import { Link } from 'react-router-dom'
 
 class Showing extends Component {
     static contextType = MoviesContext
@@ -20,10 +21,10 @@ class Showing extends Component {
         this.setState({picList: posterURLS, titles:titles}, () => {
             const movies = this.state.picList.map((movie, index) => {
                 return (
-                    <div className="flex flex-col flex-none items-center py-10" key={index}>
+                    <Link to="/book" state={"movie,"+index} className="flex flex-col flex-none items-center py-10" key={index}>
                         <img src={movie} alt="this is a movie" className="h-56 text-theme-black"/>
                         <span>{titles[index]}</span>
-                    </div>
+                    </Link>
                 )
             })
             this.setState({movies:movies})

@@ -2,12 +2,12 @@ import React, {useContext, useState} from 'react'
 import currentTicket from '../../contexts/currentTicket'
 import timeslotsContext from '../../contexts/timeslots'
 import { useNavigate, useLocation } from 'react-router'
+import toast from 'react-hot-toast'
 
 const Seating = (props) => {
     const {ticketDetails, setTicketDetails} = useContext(currentTicket)
     const { timeslots } = useContext(timeslotsContext)
-    const [ seat, setSeat ] = useState('')
-    // const [ seatStyles, setSeatStyles] = useState("p-1 items-center")
+    const [ seat, setSeat ] = useState([])
     const {movieID, time, food, foodOption, foodTime} = ticketDetails
     const location = useLocation()
     const prevPage = location.state
@@ -16,7 +16,7 @@ const Seating = (props) => {
 
     const onClickSubmit = () => {
 
-        if (seat !== "") {
+        if (seat.length > 0) {
             setTicketDetails({"movieID":movieID, "time":time, "seating":seat, "food":food, "foodOption":foodOption, "foodTime":foodTime})
 
 
@@ -26,15 +26,26 @@ const Seating = (props) => {
                 navigate('/book/food', {state:"Seating"})
             }
         } else {
-            alert("You must choose a seat before continuing!")
+            toast.error("You must choose a seat before continuing!")
         }
+    }
+
+    const onClickSeat = (currentSeat) => { 
+        const newSeatList = [...seat]
+
+        if (newSeatList.includes(currentSeat)) {
+            var index = newSeatList.indexOf(currentSeat)
+
+            newSeatList.splice(index, 1)
+        } else {
+            newSeatList.push(currentSeat)
+        }
+        setSeat(newSeatList)
 
     }
 
-    const onClickSeat = (currentSeat) => { setSeat(currentSeat) }
-
     const seatStyles = (currentSeat) => {
-        if (currentSeat === seat) {
+        if (seat.includes(currentSeat)) {
             return("text-theme")
         } else {
             return("text-theme-light hover:text-theme-dark transition duration-150")
@@ -46,7 +57,7 @@ const Seating = (props) => {
 
         for (const index in timeslots) {
             const eachTimeslot = timeslots[index]
-            if (ticketDetails.time === eachTimeslot.date) {
+            if (ticketDetails.time === eachTimeslot.date && ticketDetails.movieID === eachTimeslot.movie) {
                 const seating = eachTimeslot.seating
                 const rows = []
 
@@ -57,7 +68,7 @@ const Seating = (props) => {
                         const currentSeat = i + t
                         if (row[t] === "T") {
                             seats.push(
-                                <button key={t} className="p-1  cursor-not-allowed items-center">
+                                <button key={t} className="p-1 cursor-not-allowed items-center">
                                     <svg width="24" height="24" className="text-red-500" fill="currentColor" stroke="curentColor">
                                         <rect width="24" height="24" style={{fill:"currentColour", strokeWidth:3, stroke:"currentColor"}}/>
                                     </svg>

@@ -18,7 +18,6 @@ import MoviesContext from '../contexts/Movies'
 
 
 class Home extends Component {
-    
     static contextType = MoviesContext
     mounted = false
     state = {
@@ -45,6 +44,15 @@ class Home extends Component {
         }
     }
 
+    arrowClicked = (lr) => {
+        clearInterval(this.state.intervalId)
+        if (lr === "increase") {
+            this.increaseMovieIndex()
+        } else if (lr === "decrease") {
+            this.decreaseMovieIndex()
+        }
+    }
+
     decreaseMovieIndex = () => {
         if (this.state.prevIndex -1 === -1 && this.mounted){
             this.setState({ 
@@ -65,10 +73,7 @@ class Home extends Component {
     componentDidMount() {
         this.mounted = true
         const posterURLS = []
-        this.context.map((movies) => {
-            posterURLS.push(movies.posterURL)
-            return("movies added from context")
-        })
+        this.context.forEach((movies) => { posterURLS.push(movies.posterURL) })
         this.setState({picList: posterURLS})
 
         const newIntervalId = setInterval(() => {
@@ -105,13 +110,13 @@ class Home extends Component {
                 {/* Buttons for movie nav & book now button */}
 
                 <div className="inset-10 flex gap-x-14 md:gap-x-44 items-center justify-center absolute h-screen text-center">
-                    <button onClick={() => this.decreaseMovieIndex()} className="shadow-xl bg-theme-black rounded-full py-1 px-1">
+                    <button onClick={() => this.arrowClicked("decrease")} className="shadow-xl bg-theme-black rounded-full py-1 px-1">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#DEF2F1">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
-                    <Link to="/book" className="bg-theme-light shadow-2xl text-theme-black rounded-2xl py-3 px-5 hover:bg-theme-black hover:text-theme-light transition duration-150">Book Now</Link>
-                    <button onClick={() => this.increaseMovieIndex()} className="shadow-2xl bg-theme-black rounded-full py-1 px-1">
+                    <Link state={"movie,"+this.state.index} to="/book" className="bg-theme-light shadow-2xl text-theme-black rounded-2xl py-3 px-5 hover:bg-theme-black hover:text-theme-light transition duration-150">Book Now</Link>
+                    <button onClick={() => this.arrowClicked("increase")} className="shadow-2xl bg-theme-black rounded-full py-1 px-1">
                         <svg xmlns="http://www.w3.org/2000/svg" className="shadow-xlh-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#DEF2F1">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>

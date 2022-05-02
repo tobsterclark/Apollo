@@ -24,14 +24,14 @@ const Movie = (props) => {
     const movies = () => {
         const output = movieContext.map((movies, index) => {
             return(
-                <button className="flex gap-x-5 items-center p-3 text-sm px-5 flex-none" onClick={() => chooseMovie(index)} key={index}>
+                <button className="transition duration-150 flex gap-x-5 items-center p-3 text-sm m-3 px-5 flex-none shadow-inner hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl" onClick={() => chooseMovie(index)} key={index}>
                     <img src={movies.posterURL} alt="movie poster" className="h-28"/>
                     
                     <div className="flex flex-col items-start">
                         <span className="font-bold text-md">{movies.movieName}</span>
                         <div className="flex gap-x-1">
                             <div className="flex-col flex gap-y-1 items-start">
-                                <span>Duration: {movies.length}</span>
+                                <span>Duration: {movies.length} minutes</span>
                                 <span>Cost: {movies.price}</span>
                                 <span>Rating: {movies.rating}</span>
                             </div>
@@ -43,7 +43,7 @@ const Movie = (props) => {
             )
         })
 
-        return(<div className="flex flex-wrap justify-center">{output}</div>)
+        return(<div className="flex flex-wrap justify-center ">{output}</div>)
     }
 
     return (

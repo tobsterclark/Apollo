@@ -19,12 +19,12 @@ const Settings = (props) => {
 
 
     return (
-        <div className="h-full w-full z-10 flex justify-center items-center">
-            <div className="bg-theme-white h-full w-full text-sm md:text-2xl lg:text-4xl lg:w-2/5 font-sans font-light text-theme-black text-center z-10 rounded-lg flex justify-between flex-col py-10">
-                <div className="flex md:gap-x-5 px-10 mb-2 justify-center items-center">Settings</div>
-                <button onClick={() => signOut()}>Sign Out</button>
+        <div className="h-full w-full z-10 flex justify-center items-center bg-theme-white rounded-lg lg:w-2/5">
+            <div className="bg-theme-white h-full text-sm md:text-2xl lg:text-4xl font-sans font-light text-theme-black text-center z-10 flex justify-between flex-col py-10">
+                <div className="flex md:gap-x-5 px-5 mb-2 justify-center items-center">Settings</div>
+                <button className="mt-5 py-2 px-10 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => signOut()}>Sign Out</button>
                 <div>
-                    <span>name: {auth.currentUser.displayName}</span>
+                    <span className="text-lg">Display name: {auth.currentUser.displayName}</span>
                 </div>
                 
             </div>

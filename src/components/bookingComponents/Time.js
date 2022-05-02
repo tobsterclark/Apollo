@@ -32,7 +32,7 @@ const Time = (props) => {
             const eachTimeslot = timeslots[key]
             if (eachTimeslot.movie === movie) {
                 const date = new Date(eachTimeslot.date * 1000)
-                const time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+                const time = date.getHours()+":"+date.getMinutes()
                 const day = date.getDate()+"/"+(date.getMonth()+1)
 
                 movieTimeslots.push([day, time, eachTimeslot.date, key])

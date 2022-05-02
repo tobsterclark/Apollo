@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Outlet, Routes, Route } from "react-router-dom"
+import { Toaster, toast, ToastBar } from 'react-hot-toast'
 import Header from './Header'
 import Showing from './Showing'
 import MovieContext from '../contexts/Movies.js'
@@ -56,6 +57,7 @@ const App = () => {
       initialUserCheck()
       setinitialLoad(false)
     }
+
   }, [status, initialLoad, userDetails])
 
   if (status === 'idle') {
@@ -73,15 +75,16 @@ const App = () => {
       <currentTicket.Provider value={{ticketDetails, setTicketDetails}}> 
       <timeslotsContext.Provider value={{timeslots, setTimeslots}}>
       <foodContext.Provider value={{food, setFood}}>
+      <loginInputContext.Provider value={{input, setInput}}>
         <div className="">
-          <div className="fixed left-0 right-0 top-0 z-50">
+          <div className="fixed left-0 right-0 top-0 z-20">
             <Header/>
           </div>
 
           <div className="h-screen w-full justify-center pt-40 p-20 flex">
-            <loginInputContext.Provider value={{input, setInput}}>
+            
               <Outlet/>
-            </loginInputContext.Provider>
+            
           </div>
 
           <div className="flex" >
@@ -90,8 +93,25 @@ const App = () => {
               <Route path="/" element={<Showing/>} />
             </Routes>
           </div>
+          
+          <Toaster>
+            {(t) => (
+              <ToastBar toast={t}>
+                {({ icon, message }) => (
+                  <>
+                    {icon}
+                    {message}
+                    {t.type !== 'loading' && (
+                      <button onClick={() => toast.dismiss(t.id)}>x</button>
+                    )}
+                  </>
+                )}
+              </ToastBar>
+            )}
+          </Toaster>
           <Background/>
         </div>
+      </loginInputContext.Provider>
       </foodContext.Provider>
       </timeslotsContext.Provider>
       </currentTicket.Provider>

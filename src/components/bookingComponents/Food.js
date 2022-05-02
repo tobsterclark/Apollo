@@ -45,13 +45,14 @@ const Food = (props) => {
         } else {
             for (let i in food) {
                 const eachFood = food[i]
-
-                output.push(
-                    <button key={i} onClick={() => handleFood(eachFood)} className="p-2 flex flex-col items-center shadow-inner transition duration-150 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl">
-                        <span>Food: {eachFood["food"]}</span>
-                        <span>Cost: {eachFood["price"]}$</span>
-                    </button>
-                )
+                if (eachFood.stock > 0) {
+                    output.push(
+                        <button key={i} onClick={() => handleFood(eachFood)} className="p-2 flex flex-col items-center shadow-inner transition duration-150 hover:bg-theme-black hover:text-white border-4 border-theme-light rounded-2xl">
+                            <span>Food: {eachFood["food"]}</span>
+                            <span>Cost: {eachFood["price"]}$</span>
+                        </button>
+                    )
+                }
             }
         }
 

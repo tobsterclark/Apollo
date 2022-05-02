@@ -12,11 +12,9 @@ const Book = (props) => {
     useEffect(() => {
         if (auth.currentUser !== null) {
         const databaseTickets = []
-        database.ref('tickets').once("value", (snapshot) => {
+        database.ref('tickets/'+auth.currentUser.uid).once("value", (snapshot) => {
             snapshot.forEach(snap => {
-                if (auth.currentUser.uid === snap.val().customer) {
-                    databaseTickets.push(snap.val())
-                }
+                databaseTickets.push(snap.val())
             })
         }).then(() => {
             setTickets(databaseTickets.reverse())
@@ -24,21 +22,61 @@ const Book = (props) => {
 
     }, [movieContext])
 
+    const returnCard = (ticket, i) => {
+
+        return (
+            <div key={i} className="flex flex-col p-3 text-left shadow-inner items-start border-4 border-theme-light rounded-2xl w-full">
+                <div className="flex gap-x-5 items-center text-left py-3 text-sm">
+                    <span className="font-bold text-md">{movieContext[ticket.movie].movieName}</span>
+                    <img src={movieContext[ticket.movie].posterURL} alt={"poster of " + movieContext[ticket.movie].movieName} className="h-28"/>
+                </div>
+                <span>seat/s: {ticket.seat.join(", ")}</span>
+                <span>time: {unixToUser(ticket.time)}</span>
+                <span>food: {foodChosen(ticket.food)}</span>
+            </div>
+        )
+    }
+
     const grabData = () => {
         const output = []
+        const output1 = []
+        const output2 = []
 
-        for (let i in tickets) {
-            output.push(
-            <div key={i} className="flex flex-col p-5 text-center">
-                <span>Movie: {movieContext[tickets[i].movie].movieName}</span>
-                <span>seat: {tickets[i].seat}</span>
-                <span>customerID: {tickets[i].customer}</span>
-                <span>time: {unixToUser(tickets[i].time)}</span>
-                <span>{foodChosen(tickets[i].food)}</span>
-            </div>)
+        if (tickets.length === 0) {
+            return(
+                <div className="h-full w-full z-10 flex justify-center items-center">
+                    <div className="bg-theme-white flex flex-col justify-center text-center items-center h-full w-4/5 rounded-lg">
+                        <span>This page is empty because you havent booked any movies!</span>
+                        <span>press <Link to="/book" className='text-theme'>here</Link> to book a movie</span>
+                    </div>
+                </div>
+            )
+        } else if (tickets.length > 2) {
+            for (let i in tickets) {
+                if (i % 2 === 0) {
+                    output1.push(returnCard(tickets[i], i))
+                } else {
+                    output2.push(returnCard(tickets[i], i))
+                }
+            }
+            
+            return(
+                <div className="space-x-5 flex w-full justify-around">
+                    <span className="space-y-3 flex flex-col w-1/3">{output1}</span>
+                    <span className="space-y-3 flex flex-col w-1/3">{output2}</span>
+                </div>
+            )
+        } else {
+            for (let i in tickets) {
+                output.push(returnCard(tickets[i], i))
+            }
+
+            return(
+                <div className="w-full justify-center flex">
+                    <span className="w-1/3 flex flex-col space-y-3">{output}</span>
+                </div>
+            )
         }
-        
-        return(output)
     }
 
     const foodChosen = (foodString) => {
@@ -62,7 +100,7 @@ const Book = (props) => {
             <div className="h-full w-full z-10 flex justify-center items-center">
             <div className="bg-theme-white flex flex-col justify-center items-center h-full w-4/5 rounded-lg">
                 <span>Sign in to view your bookings!</span>
-                <span>press <Link to="/login" className='text-theme'>here</Link> to sign up</span>
+                <span>press <Link state={{prev:"/bookings"}} to="/login" className='text-theme'>here</Link> to sign up</span>
             </div>
             </div>
         )
@@ -75,7 +113,7 @@ const Book = (props) => {
                 </div>
                 {/* any bookings */}
 
-                <div className="overflow-y-auto divide-y">
+                <div className="overflow-y-auto w-full items-center justify-center">
                     {grabData()}
                 </div>
 
