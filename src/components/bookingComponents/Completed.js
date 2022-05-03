@@ -137,9 +137,13 @@ const Completed = (props) => {
 
         const date = new Date(time * 1000)
         const formattedDayMonth = date.getDate()+"/"+(date.getMonth()+1)
-        const formattedTime = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        const formattedTime = date.getHours()
 
-        return (formattedDayMonth + " " + formattedTime)
+        if (formattedTime < 12) {
+            return(formattedTime+"am "+formattedDayMonth)
+        } else {
+            return(formattedTime+"pm "+formattedDayMonth)
+        }
     }
 
     const seatChosen = () => {

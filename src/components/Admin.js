@@ -14,6 +14,7 @@ const Admin = (props) => {
     const [ editFood, setEditFood ] = useState({})
     const [ data, setData ] = useState(false)
     const [ newKey, setNewKey ] = useState(Date.now()+"new")
+    const [ foodList, setFoodList ] = useState([])
     const dbFood = database.ref('food')
 
     //Stupid design - needs cleaning up 
@@ -28,8 +29,10 @@ const Admin = (props) => {
 
     useEffect(() => {
         const food = {}
+        const dbFoodList = []
         database.ref("food").once("value", (snapshot) => {
             snapshot.forEach(snap => {
+                dbFoodList.push(snap.val().food)
                 food[snap.val().food] = {
                     "name": snap.val().food,
                     "price": snap.val().price,
@@ -43,6 +46,7 @@ const Admin = (props) => {
                 "price": "0",
                 "stock": "0"
             }
+            setFoodList(dbFoodList)
             setEditFood(food)
             setNewKey(Date.now()+"new")
             setData(true)
@@ -62,27 +66,32 @@ const Admin = (props) => {
         const price = editFood["new card"].price
         const stock = editFood["new card"].stock
         const toastId = toast.loading("Adding "+food)
-        if (food !== "name" && price !== "0" && stock !== "0") {
+        if (food !== "name" && price !== "0" && stock !== "0" && foodList.includes(food) === false) {
             dbFood.child(Date.now()).set({"food":food, "price":parseInt(price), "stock":parseInt(stock)}).then(() => {toast.success(food + " successfully added", {id:toastId})})
-        }
 
-        const newEditFood = Object.assign({}, editFood)
-        newEditFood[food] = {
-            "name": food,
-            "price": price,
-            "stock": stock
-        }
+            const newEditFood = Object.assign({}, editFood)
+            newEditFood[food] = {
+                "name": food,
+                "price": price,
+                "stock": stock
+            }
 
-        setNewKey(Date.now()+"new")
-        newEditFood["new card"] = {
-            "food": "name",
-            "price": "0",
-            "stock": "0"
-        }
+            setNewKey(Date.now()+"new")
+            newEditFood["new card"] = {
+                "name": "name",
+                "price": "0",
+                "stock": "0"
+            }
+            setEditFood(newEditFood)
 
-        setEditFood(newEditFood)
-        setNewKey(Date.now()+"new")
+            const newFoodList = [...foodList]
+            newFoodList.push(food)
+            setFoodList(newFoodList)
 
+            setNewKey(Date.now()+"new")
+
+        } else if (foodList.includes(food)) {toast.error("No duplicate foods", {id:toastId})
+        } else {toast.error("All fields must be changed", {id:toastId})}
     }
 
     const doneButton = (food) => {
@@ -97,6 +106,9 @@ const Admin = (props) => {
                         const index = newEdit.indexOf(food)
                         newEdit.splice(index, 1)
                         setEdit(newEdit)
+
+                        
+
                     })
                 }
             })
@@ -115,6 +127,16 @@ const Admin = (props) => {
 
                         const newEditFood = Object.assign({}, editFood)
                         delete newEditFood[food.name]
+
+                        const newFoodList = [...foodList]
+
+                        const index = newFoodList.indexOf(food.name)
+                        if (index > -1) {
+                        newFoodList.splice(index, 1)
+                        }
+                
+                        setFoodList(newFoodList)
+
                         setEditFood(newEditFood)
                     })
                 }
@@ -145,8 +167,8 @@ const Admin = (props) => {
                         <input value={editFood["new card"].stock} onChange={(evt) => pushEditFood("new card", "stock", evt.target.value)} className="px-2 border-b-2 rounded-t-lg border-theme w-full focus:outline-none focus:bg-theme-light"/>
                     </div>
                 </div>
-                <div className="w-1/4 text-right p-3">
-                    <button className="text-sm " onClick={() => {addFood()}}>add</button>
+                <div className="flex flex-col w-1/4 text-right gap-y-1 p-3">
+                    <button className="text-md p-1 bg-theme rounded-lg shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => {addFood()}}>add</button>
                 </div>
             </div>
         )
@@ -171,8 +193,8 @@ const Admin = (props) => {
                             <input value={editFood[currentFood.name].stock} onChange={(evt) => pushEditFood(currentFood.name, "stock", evt.target.value)} className="px-2 border-b-2 rounded-t-lg border-theme w-full focus:outline-none focus:bg-theme-light"/>
                         </div>
                     </div>
-                    <div className="w-1/4 text-right p-3">
-                        <button className="text-sm " onClick={() => {doneButton(currentFood)}}>done</button>
+                    <div className="flex flex-col w-1/4 text-center gap-y-1 p-3">
+                        <button className="text-md p-1 bg-theme rounded-lg shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => {doneButton(currentFood)}}>done</button>
                     </div>
                 </div>
             )
@@ -190,9 +212,9 @@ const Admin = (props) => {
                             <span className="">stock: {currentFood.stock}</span>
                         </div>
                     </div>
-                    <div className="flex flex-col w-1/4 text-right text-sm p-3">
-                        <button className="" onClick={() => {editButton(currentFood.name)}}>edit</button>
-                        <button className="" onClick={() => {deleteButton(currentFood)}}>delete</button>
+                    <div className="flex flex-col w-1/4 text-center gap-y-1 p-3">
+                        <button className="text-md p-1 bg-theme rounded-lg shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => {editButton(currentFood.name)}}>edit</button>
+                        <button className="text-md p-1 bg-theme rounded-lg shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => {deleteButton(currentFood)}}>delete</button>
                     </div>
                 </div>
             )}
@@ -204,15 +226,19 @@ const Admin = (props) => {
         const output2 = []
 
         if (Object.keys(editFood).length > 2) {
-            for (let i = 0; i < Object.keys(editFood).length; i++) {
-                const currentFood = editFood[Object.keys(editFood)[i]]
-                if (Object.keys(editFood)[i] === "new card") {
-                    output1.unshift(newCard())
-                } else if (i % 2 === 0) {
+            for (let i in foodList) {
+                const currentFood = editFood[foodList[i]]
+                if (i % 2 === 0) {
                     output1.push(returnCard(currentFood, i))
                 } else {
                     output2.push(returnCard(currentFood, i))
                 }
+            }
+
+            if (foodList.length % 2 === 0) {
+                output1.push(newCard())
+            } else {
+                output2.push(newCard())
             }
             
             return(
@@ -222,20 +248,16 @@ const Admin = (props) => {
                 </div>
             )
         } else if (data){
-            for (let i = 0; i < Object.keys(editFood).length; i++) {
-                const currentFood = editFood[Object.keys(editFood)[i]]
-                if (Object.keys(editFood)[i] !== "new card") {
-                    output.push(returnCard(currentFood, i))
-                } else {
-                    output.unshift(newCard())
-                }
+            for (let i in foodList) {
+                const currentFood = editFood[foodList[i]]
+                output.push(returnCard(currentFood, i))
             }
 
             output.push(newCard())
 
             return(
                 <div className="w-full justify-center flex">
-                    <span className="w-1/3 flex flex-col space-y-3">{output}</span>
+                    <span className="w-1/3 flex flex-col gap-y-3">{output}</span>
                 </div>
             )
         } 
@@ -255,9 +277,9 @@ const Admin = (props) => {
         <div className="h-full w-full z-10 flex justify-center items-center">
             <div className="bg-theme-white flex flex-col justify-between items-center h-full w-4/5 rounded-lg">
                 <div className='flex w-full justify-around m-5'>
-                    <div className="text-md text-white select-none">log out</div>
+                    <div className="text-md text-white select-none px-8">log out</div>
                     <span className='text-4xl'>Food Available</span>
-                    <button className="text-md" onClick={() => signOut()}>log out</button>
+                    <button className="text-md p-3 px-8 bg-theme rounded-2xl shadow-2xl text-white hover:bg-theme-light hover:text-black transition duration-150" onClick={() => signOut()}>log out</button>
                 </div>
                 {/* any bookings */}
 

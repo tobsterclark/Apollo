@@ -117,9 +117,13 @@ const Book = (props) => {
     const unixToUser = (unix) => {
         const date = new Date(unix * 1000)
         const dayMonth = date.getDate()+"/"+(date.getMonth()+1)
-        const time = date.getHours()+":"+date.getMinutes()
+        const time = date.getHours()
 
-        return(time + " " + dayMonth)
+        if (time < 12) {
+            return(time+"am "+dayMonth)
+        } else {
+            return(time+"pm "+dayMonth)
+        }
     }
 
 
