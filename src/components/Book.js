@@ -72,7 +72,15 @@ const Book = (props) => {
         }
     }, [cookies])
 
-    if (status === 'idle') {return(<span className="flex justify-center text-center">loading</span>)}
+    if (status === 'idle')  {
+        return (
+            <div className="h-full w-full z-10 flex justify-center items-center font-sans font-light">
+                <div className="bg-theme-white h-full w-4/5 rounded-lg">
+                    Loading
+                </div>
+            </div>
+        )  
+    }
     if (status === 'resolved') {
         return (
             <div className="h-full w-full z-10 flex justify-center items-center font-sans font-light">

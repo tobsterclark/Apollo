@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import logo from './Images/logo.svg'
-import {auth} from './Firebase.js'
+import userDetailsContext from '../contexts/userDetails'
 import { Link } from "react-router-dom"
+import {auth} from './Firebase.js'
 
 const Header = () => {
+    const {userDetails} = useContext(userDetailsContext)
     const hidden = "hidden"
     const user = auth.currentUser
     const shown = "text-sm text-center text-theme-white font-light font-sans py-2"
@@ -20,17 +22,19 @@ const Header = () => {
     }
 
     useEffect(() => {
-        if (user.uid === "sglIHO7BjfW7solE7uKU6e3PiCb2") {
-            setLoginUser("Admin Preferences")
-            setLoginUserPath("/admin")
-        } else if (user.displayName !== ""){
-            setLoginUser(user.displayName)
-            setLoginUserPath("/settings")
+        if (auth.currentUser) {
+            if (user.uid === "sglIHO7BjfW7solE7uKU6e3PiCb2") {
+                setLoginUser("Admin Preferences")
+                setLoginUserPath("/admin")
+            } else if (user.displayName !== ""){
+                setLoginUser(user.displayName)
+                setLoginUserPath("/settings")
+            } 
         } else {
-            setLoginUser("Log in")
-            setLoginUserPath("/login")            
+        setLoginUser("Log in")
+        setLoginUserPath("/login")            
         }
-    }, [user])
+    }, [user, userDetails])
 
     return (
 

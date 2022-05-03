@@ -400,3 +400,131 @@ Done in 29.03s.
 
 [1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
 [1mHosting URL:[22m https://apollo-9dd16.web.app
+yarn run v1.22.17
+$ craco build
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  234.51 KB (-39 B)   build/static/js/2.8a74e59a.chunk.js
+  9.48 KB (+1.15 KB)  build/static/js/main.d1d7e6d4.chunk.js
+  2.95 KB (+47 B)     build/static/css/main.e2e83958.chunk.css
+  777 B               build/static/js/runtime-main.e218629b.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+Done in 159.01s.
+
+[1m[37m===[39m Deploying to 'apollo-9dd16'...[22m
+
+[1m[36mi [39m[22m deploying [1mhosting[22m
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m beginning deploy...
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m found 15 files in [1mApollo/public[22m
+[2K[9999D[1m[36m⠋  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [1/8] ([1m[32m12%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [6/8] ([1m[32m75%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [7/8] ([1m[32m87%[39m[22m)[2K[9999D[1m[32m✔  hosting[apollo-9dd16]:[39m[22m file upload complete
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m finalizing version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m version finalized
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m releasing new version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m release complete
+
+[1m[32m✔ [39m[22m [1m[4mDeploy complete![24m[22m
+
+[1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
+[1mHosting URL:[22m https://apollo-9dd16.web.app
+yarn run v1.22.17
+$ craco build
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  234.51 KB       build/static/js/2.8a74e59a.chunk.js
+  9.5 KB (+15 B)  build/static/js/main.7732c736.chunk.js
+  2.95 KB         build/static/css/main.e2e83958.chunk.css
+  777 B           build/static/js/runtime-main.e218629b.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+Done in 26.71s.
+
+[1m[37m===[39m Deploying to 'apollo-9dd16'...[22m
+
+[1m[36mi [39m[22m deploying [1mhosting[22m
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m beginning deploy...
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m found 15 files in [1mApollo/public[22m
+[2K[9999D[1m[36m⠋  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [0/4] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [1/4] ([1m[32m25%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [2/4] ([1m[32m50%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [3/4] ([1m[32m75%[39m[22m)[2K[9999D[1m[32m✔  hosting[apollo-9dd16]:[39m[22m file upload complete
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m finalizing version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m version finalized
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m releasing new version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m release complete
+
+[1m[32m✔ [39m[22m [1m[4mDeploy complete![24m[22m
+
+[1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
+[1mHosting URL:[22m https://apollo-9dd16.web.app
+yarn run v1.22.17
+$ craco build
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  234.42 KB (-88 B)  build/static/js/2.d733a934.chunk.js
+  9.94 KB (+455 B)   build/static/js/main.337ea8c5.chunk.js
+  2.96 KB (+8 B)     build/static/css/main.a76019fb.chunk.css
+  777 B              build/static/js/runtime-main.e218629b.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+Done in 80.89s.
+
+[1m[37m===[39m Deploying to 'apollo-9dd16'...[22m
+
+[1m[36mi [39m[22m deploying [1mhosting[22m
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m beginning deploy...
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m found 15 files in [1mApollo/public[22m
+[2K[9999D[1m[36m⠋  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [0/8] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [2/8] ([1m[32m25%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [2/8] ([1m[32m25%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [3/8] ([1m[32m37%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [4/8] ([1m[32m50%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [4/8] ([1m[32m50%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [6/8] ([1m[32m75%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [6/8] ([1m[32m75%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22muploading new files [6/8] ([1m[32m75%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22muploading new files [6/8] ([1m[32m75%[39m[22m)[2K[9999D[1m[32m✔  hosting[apollo-9dd16]:[39m[22m file upload complete
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m finalizing version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m version finalized
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m releasing new version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m release complete
+
+[1m[32m✔ [39m[22m [1m[4mDeploy complete![24m[22m
+
+[1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
+[1mHosting URL:[22m https://apollo-9dd16.web.app
+yarn run v1.22.17
+$ craco build

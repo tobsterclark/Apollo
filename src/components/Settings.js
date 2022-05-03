@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import {auth} from './Firebase.js'
 import userDetailsContext from '../contexts/userDetails'
 import { useNavigate } from 'react-router'
+import toast from 'react-hot-toast'
 
 
 const Settings = (props) => {
@@ -14,6 +15,7 @@ const Settings = (props) => {
         setUserDetails({"displayName":""})
         auth.signOut().then(() => {
             navigate("/")
+            toast.success("Signed out")
         })
     }
 

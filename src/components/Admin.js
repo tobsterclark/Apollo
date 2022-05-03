@@ -157,16 +157,16 @@ const Admin = (props) => {
             return (
                 <div key={key} className="flex p-3 text-left shadow-inner items-start border-4 border-theme-light rounded-2xl w-full">
                     <div className="flex flex-col w-3/4">
-                        <div className="flex gap-x-5 py-3">
+                        <div className="flex gap-x-5 py-3 w-full">
                             <span className="font-bold">name: </span>
                             <span>{currentFood.name}</span>
                             
                         </div>
-                        <div className="flex gap-x-2 overflow-hidden">
+                        <div className="flex gap-x-2 overflow-hidden w-full">
                             <span className="">price: </span>
                             <input value={editFood[currentFood.name].price} onChange={(evt) => pushEditFood(currentFood.name, "price", evt.target.value)} className="px-2 border-b-2 rounded-t-lg border-theme w-full focus:outline-none focus:bg-theme-light"/>
                         </div>
-                        <div className="flex gap-x-5">
+                        <div className="flex gap-x-5 w-full">
                             <span className="">stock: </span>
                             <input value={editFood[currentFood.name].stock} onChange={(evt) => pushEditFood(currentFood.name, "stock", evt.target.value)} className="px-2 border-b-2 rounded-t-lg border-theme w-full focus:outline-none focus:bg-theme-light"/>
                         </div>
@@ -222,7 +222,6 @@ const Admin = (props) => {
                 </div>
             )
         } else if (data){
-            console.log(Object.keys(editFood).length)
             for (let i = 0; i < Object.keys(editFood).length; i++) {
                 const currentFood = editFood[Object.keys(editFood)[i]]
                 if (Object.keys(editFood)[i] !== "new card") {

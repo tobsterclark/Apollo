@@ -13,17 +13,23 @@ const Completed = (props) => {
     const navigate = useNavigate()
     const [ edit, setEdit ] = useState("edit")
     const [ content, setContent ] = useState()
+    const [ seatName, setSeatName ] = useState("Seat")
     const {movieID, time, seating, food, foodOption, foodTime} = ticketDetails
 
 
-    useEffect(() => {
+    useEffect(() => {        
+        if (seating.length > 1) {
+            setSeatName("Seating")
+        } else {
+            setSeatName("Seat")
+        }
         setEdit("edit") 
         setContent(
-            <div className="flex flex-col divide-y divide-black px-10 items-center">
-                <span to="/book/movie" state="Completed" className="py-4 px-20">{movie()}</span>
-                <span to="/book/time" state="Completed" className="py-4 w-52 text-center">{timeChosen()}</span>
-                <span to="/book/seating" state="Completed" className="py-4 w-52 text-center">your seat/s: {seating.join(", ")}</span>
-                <span to="/book/food" state="Completed" className="py-4 w-52 text-center"><span>{foodChosen()}</span></span>
+            <div className="flex flex-col divide-y divide-black px-10 items-center w-full">
+                <span to="/book/movie" state="Completed" className="p-4 px-20">{movie()}</span>
+                <span to="/book/time" state="Completed" className="p-4 w-1/3 text-center">{timeChosen()}</span>
+                <span to="/book/seating" state="Completed" className="p-4 w-1/3 text-center flex gap-x-1">{seatName}: {seatChosen()}</span>
+                <span to="/book/food" state="Completed" className="p-4 w-1/3 text-center"><span>{foodChosen()}</span></span>
             </div>
         )
 
@@ -73,12 +79,14 @@ const Completed = (props) => {
 
         dbFoodRef.once("value", (snapshot) => {
             snapshot.forEach(snap => {
-                if (snap.val().food === foodOption && snap.val().stock > 0) {
-                    const stock = snap.val().stock - 1
-                    dbFoodRef.child(snap.key).child("stock").set(stock)
-                } else if (snap.val().food === foodOption) {
-                    toast.error("There is no stock left for that food! Choose something different")
-                    failed = true
+                for (let i in foodOption) {
+                    if (snap.val().food === foodOption[i] && snap.val().stock > 0) {
+                        const stock = snap.val().stock - 1
+                        dbFoodRef.child(snap.key).child("stock").set(stock)
+                    } else if (snap.val().food === foodOption[i]) {
+                        toast.error("There is no stock left for that food! Choose something different")
+                        failed = true
+                    }
                 }
             })
         })
@@ -104,21 +112,21 @@ const Completed = (props) => {
     const editButton = () => {
         if (edit === "edit") {
             setContent(
-                <div className="flex flex-col divide-y divide-black px-10 items-center">
-                    <Link to="/book/movie" state="Completed" className="text-theme py-4 px-20">{movie()}</Link>
-                    <Link to="/book/time" state="Completed" className="text-theme py-4 w-52 text-center">{timeChosen()}</Link>
-                    <Link to="/book/seating" state="Completed" className="text-theme py-4 w-52 text-center">your seat/s: {seating.join(", ")}</Link>
-                    <Link to="/book/food" state="Completed" className="text-theme py-4 w-52 text-center"><span>{foodChosen()}</span></Link>
+                <div className="flex flex-col divide-y divide-black px-10 items-center w-full">
+                    <Link to="/book/movie" state="Completed" className="text-theme p-4 px-20">{movie()}</Link>
+                    <Link to="/book/time" state="Completed" className="text-theme p-4 w-1/3 text-center">{timeChosen()}</Link>
+                    <Link to="/book/seating" state="Completed" className="text-theme p-4 w-1/3 flex gap-x-1">{seatName}: {seatChosen()}</Link>
+                    <Link to="/book/food" state="Completed" className="text-theme p-4 w-1/3 text-center"><span>{foodChosen()}</span></Link>
                 </div>
             )
             setEdit("done")
         } else {
             setContent(
-                <div className="flex flex-col divide-y divide-black px-10 items-center">
-                    <span to="/book/movie" state="Completed" className="py-4 px-20">{movie()}</span>
-                    <span to="/book/time" state="Completed" className="py-4 w-52 text-center">{timeChosen()}</span>
-                    <span to="/book/seating" state="Completed" className="py-4 w-52 text-center">your seat/s: {seating.join(", ")}</span>
-                    <span to="/book/food" state="Completed" className="py-4 w-52 text-center"><span>{foodChosen()}</span></span>
+                <div className="flex flex-col divide-y divide-black px-10 items-center w-full">
+                    <span to="/book/movie" state="Completed" className="p-4 px-20">{movie()}</span>
+                    <span to="/book/time" state="Completed" className="p-4 w-1/3 text-center">{timeChosen()}</span>
+                    <span to="/book/seating" state="Completed" className="p-4 w-1/3 flex gap-x-1">{seatName}: {seatChosen()}</span>
+                    <span to="/book/food" state="Completed" className="p-4 w-1/3 text-center"><span>{foodChosen()}</span></span>
                 </div>
             )
             setEdit("edit")
@@ -134,9 +142,31 @@ const Completed = (props) => {
         return (formattedDayMonth + " " + formattedTime)
     }
 
+    const seatChosen = () => {
+        const output = []
+        for (let i in seating) {output.push(<div key={i} className="bg-theme-light rounded-2xl text-center px-3">{seating[i]}</div>)}
+
+        return(<span className="flex gap-2 w-full flex-wrap">{output}</span>)
+    }
+
+    const eachFood = () => {
+        const output = []
+        for (let i in foodOption) {output.push(<div key={i} className="bg-theme-light rounded-2xl text-center px-3">{foodOption[i]}</div>)}
+
+        return(<span className="flex gap-2 w-full flex-wrap">{output}</span>)
+    }
+
     const foodChosen = () => {
         if (food === false) { return "No food chosen"}
-        else { return foodOption + " selected, delivered " + foodTime + " minutes into the movie"}
+        else { return (
+            <div className="flex flex-col w-full">
+                <div className="w-full flex gap-x-1">
+                    <span>Food: </span>
+                    <span>{eachFood()}</span>
+                </div>
+                <span className="text-left">Delivered: {foodTime} minutes into the movie</span>
+            </div>
+        )}
     }
 
 

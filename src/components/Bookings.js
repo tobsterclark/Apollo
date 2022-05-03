@@ -23,6 +23,12 @@ const Book = (props) => {
     }, [movieContext])
 
     const returnCard = (ticket, i) => {
+        var seatName = "seat"
+        if (ticket.seat.length > 1) {
+            seatName = "seating"
+        } else {
+            seatName = "seat"
+        }
 
         return (
             <div key={i} className="flex flex-col p-3 text-left shadow-inner items-start border-4 border-theme-light rounded-2xl w-full">
@@ -30,9 +36,9 @@ const Book = (props) => {
                     <span className="font-bold text-md">{movieContext[ticket.movie].movieName}</span>
                     <img src={movieContext[ticket.movie].posterURL} alt={"poster of " + movieContext[ticket.movie].movieName} className="h-28"/>
                 </div>
-                <span>seat/s: {ticket.seat.join(", ")}</span>
-                <span>time: {unixToUser(ticket.time)}</span>
-                <span>food: {foodChosen(ticket.food)}</span>
+                <span className="w-full flex gap-x-1">{seatName}: {seatChosen(ticket.seat)}</span>
+                <span>Time: {unixToUser(ticket.time)}</span>
+                <span>{foodChosen(ticket.food)}</span>
             </div>
         )
     }
@@ -79,11 +85,33 @@ const Book = (props) => {
         }
     }
 
+    const seatChosen = (seating) => {
+        const output = []
+        for (let i in seating) {output.push(<div key={i} className="bg-theme-light rounded-2xl text-center px-3">{seating[i]}</div>)}
+
+        return(<span className="flex gap-2 w-full flex-wrap">{output}</span>)
+
+    }
+
+    const eachFood = (foodOption) => {
+        const output = []
+        for (let i in foodOption) {output.push(<div key={i} className="bg-theme-light rounded-2xl text-center px-3">{foodOption[i]}</div>)}
+
+        return(<span className="flex gap-2 w-full flex-wrap">{output}</span>)
+    }
+
     const foodChosen = (foodString) => {
         const [food, foodOption, foodTime] = foodString.split("/")
-
         if (food === "false") { return "No food chosen"}
-        else { return foodOption + " selected, delivered " + foodTime + " minutes into the movie"}
+        else { return (
+            <div className="flex flex-col w-full">
+                <div className="w-full flex gap-x-1">
+                    <span>Food: </span>
+                    <span>{eachFood(foodOption.split(","))}</span>
+                </div>
+                <span className="text-left">Delivered: {foodTime} minutes into the movie</span>
+            </div>
+        )}
     }
 
     const unixToUser = (unix) => {
