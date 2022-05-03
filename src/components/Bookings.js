@@ -23,11 +23,11 @@ const Book = (props) => {
     }, [movieContext])
 
     const returnCard = (ticket, i) => {
-        var seatName = "seat"
+        var seatName = "Seat"
         if (ticket.seat.length > 1) {
-            seatName = "seating"
+            seatName = "Seating"
         } else {
-            seatName = "seat"
+            seatName = "Seat"
         }
 
         return (
@@ -102,7 +102,12 @@ const Book = (props) => {
 
     const foodChosen = (foodString) => {
         const [food, foodOption, foodTime] = foodString.split("/")
-        if (food === "false") { return "No food chosen"}
+        if (food === "false") { return (
+            <div className="flex flex-col">
+                <span>No food chosen</span>
+                <span className="text-md text-white select-none">this is not text :(</span>
+            </div>
+            )}
         else { return (
             <div className="flex flex-col w-full">
                 <div className="w-full flex gap-x-1">

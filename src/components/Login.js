@@ -3,6 +3,7 @@ import loginInputContext from '../contexts/InputInfo'
 import userDetailsContext from '../contexts/userDetails'
 import {Outlet, Link, useLocation, useNavigate} from "react-router-dom"
 import {auth} from './Firebase.js'
+import useKeyPress from './functions/useKeyPress'
 import toast from 'react-hot-toast'
 
 
@@ -15,11 +16,14 @@ const Login = (props) => {
     const navigate = useNavigate()
     const [loginStyles, setLoginStyles] = useState("")
     const [signupStyles, setSignupStyles] = useState("")
+    const enterPressed = useKeyPress("Enter")
 
     useEffect(() => {
         if (state !== null) {
             setPrevious(state.prev)
         } 
+
+        if (enterPressed) {onSubmit()}
 
         if (pathname === "/signup"){
             setSignupStyles("bg-theme py-2 px-5 md:px-10 flex-1 rounded-2xl shadow-2xl text-white")
@@ -28,6 +32,7 @@ const Login = (props) => {
             setLoginStyles("bg-theme py-2 px-5 md:px-10 flex-1 rounded-2xl shadow-2xl text-white ")
             setSignupStyles("flex-1 py-2 px-5 md:px-10 hover:bg-theme-light transition duration-150 rounded-2xl")            
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [email, password, name, phone, pathname, state])
 
     const onSubmit = () => {
@@ -61,6 +66,7 @@ const Login = (props) => {
                 }).catch((error)=>{toast.error("Error logging in - " + error.message)})
         }
     }
+
 
     return (
         <div className="h-full w-full z-10 flex justify-center items-center">

@@ -610,3 +610,45 @@ Done in 58.54s.
 
 [1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
 [1mHosting URL:[22m https://apollo-9dd16.web.app
+yarn run v1.22.17
+$ craco build
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  234.52 KB        build/static/js/2.67def9b8.chunk.js
+  10.11 KB (+7 B)  build/static/js/main.fda40eb7.chunk.js
+  3.06 KB (-26 B)  build/static/css/main.d7ded641.chunk.css
+  777 B            build/static/js/runtime-main.e218629b.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+Done in 49.39s.
+
+[1m[37m===[39m Deploying to 'apollo-9dd16'...[22m
+
+[1m[36mi [39m[22m deploying [1mhosting[22m
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m beginning deploy...
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m found 15 files in [1mApollo/public[22m
+[2K[9999D[1m[36m⠋  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22mhashing files [14/15] ([1m[32m93%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22madding files to version [0/15] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠦  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠧  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠇  hosting: [39m[22muploading new files [0/6] ([1m[32m0%[39m[22m)[2K[9999D[1m[36m⠏  hosting: [39m[22muploading new files [3/6] ([1m[32m50%[39m[22m)[2K[9999D[1m[36m⠋  hosting: [39m[22muploading new files [3/6] ([1m[32m50%[39m[22m)[2K[9999D[1m[36m⠙  hosting: [39m[22muploading new files [4/6] ([1m[32m66%[39m[22m)[2K[9999D[1m[36m⠹  hosting: [39m[22muploading new files [4/6] ([1m[32m66%[39m[22m)[2K[9999D[1m[36m⠸  hosting: [39m[22muploading new files [4/6] ([1m[32m66%[39m[22m)[2K[9999D[1m[36m⠼  hosting: [39m[22muploading new files [5/6] ([1m[32m83%[39m[22m)[2K[9999D[1m[36m⠴  hosting: [39m[22muploading new files [5/6] ([1m[32m83%[39m[22m)[2K[9999D[1m[32m✔  hosting[apollo-9dd16]:[39m[22m file upload complete
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m finalizing version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m version finalized
+[1m[36mi  hosting[apollo-9dd16]:[39m[22m releasing new version...
+[1m[32m✔  hosting[apollo-9dd16]:[39m[22m release complete
+
+[1m[32m✔ [39m[22m [1m[4mDeploy complete![24m[22m
+
+[1mProject Console:[22m https://console.firebase.google.com/project/apollo-9dd16/overview
+[1mHosting URL:[22m https://apollo-9dd16.web.app
