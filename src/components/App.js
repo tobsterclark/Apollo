@@ -81,7 +81,7 @@ const App = () => {
             <Header/>
           </div>
 
-          <div className="h-screen w-full justify-center pt-40 p-20 flex">
+          <div className="h-screen w-full justify-center pt-28 p-8 flex">
             
               <Outlet/>
             
