@@ -3,7 +3,7 @@ import 'firebase/database'
 import 'firebase/auth'
   
 const firebaseConfig = {
-    apiKey: "AIzaSyBLyGe_YH7WoG5INo2VqlTIFVC9PUO5tC4",
+    apiKey: "",
     authDomain: "apollo-9dd16.firebaseapp.com",
     databaseURL: "https://apollo-9dd16-default-rtdb.asia-southeast1.firebasedatabase.app/",
     projectId: "apollo-9dd16",
