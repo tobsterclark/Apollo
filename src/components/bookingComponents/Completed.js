@@ -137,10 +137,13 @@ const Completed = (props) => {
 
         const date = new Date(time * 1000)
         const formattedDayMonth = date.getDate()+"/"+(date.getMonth()+1)
-        const formattedTime = date.getHours()
+        var formattedTime = date.getHours()
 
         if (formattedTime < 12) {
             return(formattedTime+"am "+formattedDayMonth)
+        } else if (formattedTime > 12){
+            formattedTime -= 12
+            return(formattedTime+"pm "+formattedDayMonth)
         } else {
             return(formattedTime+"pm "+formattedDayMonth)
         }

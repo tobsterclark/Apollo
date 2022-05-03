@@ -70,14 +70,14 @@ const Food = (props) => {
                 output.push(<div key="first">What time into the movie would you like the food?</div>)
                 for (let i in times) {
                     output.push(
-                        <button key={i} onClick={() => handleTime(times[i])} className="p-2 items-center shadow-inner hover:bg-theme-black transition duration-150 hover:text-white border-4 border-theme-light rounded-2xl">
-                            <span>{times[i]} minutes in</span>
+                        <button key={i} onClick={() => handleTime(times[i])} className="w-1/3 p-2 items-center shadow-inner hover:bg-theme-black transition duration-150 hover:text-white border-4 border-theme-light rounded-2xl">
+                            <span>{times[i]} minutes into the movie</span>
                         </button>
                     )
                 }
 
                 return(
-                    <div className="flex flex-col overflow-y-auto space-y-2 text-center">
+                    <div className="flex flex-col overflow-y-auto space-y-2 text-center items-center">
                         {output}
                     </div>
                 )

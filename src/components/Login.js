@@ -22,11 +22,11 @@ const Login = (props) => {
         } 
 
         if (pathname === "/signup"){
-            setSignupStyles("bg-theme rounded-xl py-2 px-5 md:px-10 flex-1 shadow-lg")
-            setLoginStyles("flex-1 py-2 px-5 md:px-10")
+            setSignupStyles("bg-theme py-2 px-5 md:px-10 flex-1 rounded-2xl shadow-2xl text-white")
+            setLoginStyles("flex-1 py-2 px-5 md:px-10 hover:bg-theme-light transition duration-150 rounded-2xl")
         } else {
-            setLoginStyles("bg-theme rounded-xl py-2 px-5 md:px-10 flex-1 shadow-lg")
-            setSignupStyles("flex-1 py-2 px-5 md:px-10")            
+            setLoginStyles("bg-theme py-2 px-5 md:px-10 flex-1 rounded-2xl shadow-2xl text-white ")
+            setSignupStyles("flex-1 py-2 px-5 md:px-10 hover:bg-theme-light transition duration-150 rounded-2xl")            
         }
     }, [email, password, name, phone, pathname, state])
 
